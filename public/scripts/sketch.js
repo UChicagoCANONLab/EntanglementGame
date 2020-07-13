@@ -1,7 +1,8 @@
 var socket;
 
 function setup(){
-	createCanvas(600, 400);
+	game_canvas = createCanvas(600, 400);
+	game_canvas.parent("game_stage");
 	background(51);
 
 	socket = io.connect('http://localhost:3000');
