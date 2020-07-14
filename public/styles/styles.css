@@ -1,0 +1,23 @@
+#chatbox_container_outer {
+	height: 400px;
+	width: 100%;
+}
+
+#chatbox_container_inner {
+	width: 18em;
+	height: 300px;
+	padding: 5%;
+	position: relative;
+	overflow: auto
+}
+
+#chat_presets {
+	position:absolute;
+	bottom:0;
+	padding-bottom: 2%;
+	padding-top: 2%;
+}
+
+#preset_btn {
+	width: 100%;
+}
