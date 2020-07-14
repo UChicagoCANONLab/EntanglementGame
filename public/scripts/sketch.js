@@ -43,15 +43,24 @@ function draw(){
 
 function keyPressed() {
 	if (keyCode === UP_ARROW) {
-	 	y = y - 72;
+		if (y != 0) {
+			y = y - 72;
+		}
 	}
 	else if (keyCode === DOWN_ARROW) {
-		y = y + 72;
+		if (y != 648) {
+			y = y + 72;
+		}
 	}
 	if (keyCode === LEFT_ARROW) {
-		x = x - 72;
-	} else if (keyCode === RIGHT_ARROW) {
-		x = x + 72;
+		if (x != 0) {
+			x = x - 72;
+		}
+	}
+	else if (keyCode === RIGHT_ARROW) {
+		if (x != 648) {
+			x = x + 72;
+		}
 	}
 
 	var data = {
