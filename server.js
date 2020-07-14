@@ -17,10 +17,16 @@ function newConnection(socket){
 	console.log('new connection: ' + socket.id)
 
 	socket.on('position', posMsg)
+	socket.on('chat', chatMsg)
 
 	function posMsg(data){
 		socket.broadcast.emit('position', data)
-		console.log(data)
+		console.log(data);
+	}
+
+	function chatMsg(data){
+		socket.broadcast.emit('chat', data)
+		console.log(data);
 	}
 
 }
