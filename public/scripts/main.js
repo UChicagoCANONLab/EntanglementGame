@@ -53,10 +53,10 @@ function handleChat(data){
 
 function writeChat(data, player_num){
 	if (player_num == 1){
-		document.getElementById("chatbox_container_inner").innerHTML = document.getElementById("chatbox_container_inner").innerHTML+"<div class='alert alert-primary' role='alert'><b>Player 1: </b>" + data + "</div>";
+		document.getElementById("chatbox_container_inner").innerHTML = document.getElementById("chatbox_container_inner").innerHTML+"<div class='alert alert-info' role='alert'><b>Me: </b>" + data + "</div>";
 	}
 	else{
-		document.getElementById("chatbox_container_inner").innerHTML = document.getElementById("chatbox_container_inner").innerHTML+"<div class='alert alert-danger' role='alert'><b>Player 2: </b>" + data + "</div>";
+		document.getElementById("chatbox_container_inner").innerHTML = document.getElementById("chatbox_container_inner").innerHTML+"<div class='alert alert-warning' role='alert'><b>Teammate: </b>" + data + "</div>";
 	}
 	
 	updateScroll();
