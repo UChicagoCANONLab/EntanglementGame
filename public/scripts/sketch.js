@@ -5,8 +5,112 @@ var y = 0;
 
 var player_img
 
+
+var computer_img
+var experiment_img
+var first_aid_img
+var flag_img
+var fuel_img
+var manual_img
+var map_img
+var moon_rock_img
+var telescope_img
+var walkie_talkie_img
+var water_img
+var wrench_img
+
+
+var computer = {
+  name: 'Computer',
+  img_path : '../res/Computer.png',
+  collected : false,
+  location : [0,0]
+};
+
+var experiment = {
+  name: 'Experiment',
+  img_path : '../res/Experiment.png',
+  collected : false,
+  location : [0,0]
+};
+var first_aid = {
+  name: 'First Aid Kit',
+  img_path : '../res/First aid.png',
+  collected : false,
+  location : [0,0]
+};
+var flag = {
+  name: 'Flag',
+  img_path : '../res/Flag.png',
+  collected : false,
+  location : [0,0]
+};
+var fuel = {
+  name: 'Fuel Tank',
+  img_path : '../res/Fuel.png',
+  collected : false,
+  location : [0,0]
+};
+var manual = {
+  name: 'Ship Manual',
+  img_path : '../res/manual.png',
+  collected : false,
+  location : [0,0]
+};
+var map = {
+  name: 'Space Map',
+  img_path : '../res/Map.png',
+  collected : false,
+  location : [0,0]
+};
+var moon_rock = {
+  name: 'Moon Rock',
+  img_path : '../res/Moon rock.png',
+  collected : false,
+  location : [0,0]
+};
+var telescope = {
+  name: 'Telescope',
+  img_path : '../res/telescope.png',
+  collected : false,
+  location : [0,0]
+};
+var walkie_talkie = {
+  name: 'Walkie Talkie',
+  img_path : '../res/Walkie talkie.png',
+  collected : false,
+  location : [0,0]
+};
+var water = {
+  name: 'Water Bottle',
+  img_path : '../res/Water.png',
+  collected : false,
+  location : [0,0]
+};
+var wrench = {
+  name: 'Wrench',
+  img_path : '../res/Wrench.png',
+  collected : false,
+  location : [0,0]
+};
+
+
+
 function preload() {
-	img = loadImage('../res/p1.png');
+	player_img = loadImage('../res/p1.png');
+	computer_img = loadImage(computer.img_path);
+	experiment_img = loadImage(experiment.img_path);
+	first_aid_img = loadImage(first_aid.img_path);
+	flag_img = loadImage(flag.img_path);
+	manual_img = loadImage(manual.img_path);
+	map_img = loadImage('../res/Map.png');
+	moon_rock_img = loadImage(moon_rock.img_path);
+	telescope_img = loadImage(telescope.img_path);
+	walkie_talkie_img = loadImage(walkie_talkie.img_path);
+	water_img = loadImage(water.img_path);
+	wrench_img = loadImage(wrench.img_path);
+	
+	
 }
 
 function setup(){
@@ -26,7 +130,7 @@ function setup(){
 
 function draw(){
 	background(220);
-	image(img, x, y, 72, 72);
+	image(player_img, x, y, 72, 72);
 }
 
 function keyPressed() {
