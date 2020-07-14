@@ -1,14 +1,14 @@
 var socket;
 
-var x = 325;
-var y = 325;
+var x = 0;
+var y = 0;
 
 function setup(){
 
 	var canvasDiv = document.getElementById('game_stage');
     var width = canvasDiv.offsetWidth;
     //var game_canvas = createCanvas(width,600);
-    var game_canvas = createCanvas(650,650);
+    var game_canvas = createCanvas(648,648);
 	game_canvas.parent("game_stage");
 	background(51);
 
@@ -43,15 +43,15 @@ function draw(){
 
 function keyPressed() {
 	if (keyCode === UP_ARROW) {
-	 	y = y - 10;
+	 	y = y - 72;
 	}
 	else if (keyCode === DOWN_ARROW) {
-		y = y + 10;
+		y = y + 72;
 	}
 	if (keyCode === LEFT_ARROW) {
-		x = x - 10;
+		x = x - 72;
 	} else if (keyCode === RIGHT_ARROW) {
-		x = x + 10;
+		x = x + 72;
 	}
 
 	var data = {
