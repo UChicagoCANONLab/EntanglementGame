@@ -1,7 +1,7 @@
 var socket;
 
-var x = 0;
-var y = 0;
+var x = 36;
+var y = 36;
 
 function setup(){
 
@@ -44,22 +44,22 @@ function draw(){
 
 function keyPressed() {
 	if (keyCode === UP_ARROW) {
-		if (y != 0) {
+		if (!(y - 72 <= 0)) {
 			y = y - 72;
 		}
 	}
 	else if (keyCode === DOWN_ARROW) {
-		if (y != 648) {
+		if (!(y + 72 >= 648)) {
 			y = y + 72;
 		}
 	}
 	if (keyCode === LEFT_ARROW) {
-		if (x != 0) {
+		if (!(x - 72 <= 0)) {
 			x = x - 72;
 		}
 	}
 	else if (keyCode === RIGHT_ARROW) {
-		if (x != 648) {
+		if (!(x + 72 >= 648)) {
 			x = x + 72;
 		}
 	}
