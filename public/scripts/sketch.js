@@ -31,7 +31,7 @@ function draw(){
 
 function keyPressed() {
 	if (keyCode === UP_ARROW) {
-		if (!(y - 72 <= 0)) {
+		if (!(y - 72 < 0)) {
 			y = y - 72;
 		}
 	}
@@ -41,7 +41,7 @@ function keyPressed() {
 		}
 	}
 	if (keyCode === LEFT_ARROW) {
-		if (!(x - 72 <= 0)) {
+		if (!(x - 72 < 0)) {
 			x = x - 72;
 		}
 	}
