@@ -1,7 +1,13 @@
 var socket;
 
-var x = 36;
-var y = 36;
+var x = 0;
+var y = 0;
+
+var player_img
+
+function preload() {
+	img = loadImage('../res/p1.png');
+}
 
 function setup(){
 
@@ -20,7 +26,7 @@ function setup(){
 
 function draw(){
 	background(220);
-	ellipse(x, y, 50, 50)
+	image(img, x, y, 72, 72);
 }
 
 function keyPressed() {
