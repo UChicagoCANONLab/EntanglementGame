@@ -1,7 +1,10 @@
 var socket;
 
 function setup(){
-	game_canvas = createCanvas(600, 400);
+
+	var canvasDiv = document.getElementById('game_stage');
+    var width = canvasDiv.offsetWidth;
+    var game_canvas = createCanvas(width,400);
 	game_canvas.parent("game_stage");
 	background(51);
 
