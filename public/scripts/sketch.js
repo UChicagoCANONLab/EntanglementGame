@@ -13,7 +13,7 @@ function setup(){
 	background(51);
 
 	socket = io.connect('http://localhost:3000');
-	socket.on('mouse', newDrawing)
+	socket.on('position', adjustPos)
 
 }
 
@@ -53,4 +53,15 @@ function keyPressed() {
 	} else if (keyCode === RIGHT_ARROW) {
 		x = x + 10;
 	}
+
+	var data = {
+		x: x,
+		y: y
+	}
+	socket.emit('position', data)
+}
+
+function adjustPos(data){
+	x = data.x;
+	y = data.y;
 }
