@@ -1,5 +1,8 @@
 var socket;
 
+var x = 325;
+var y = 325;
+
 function setup(){
 
 	var canvasDiv = document.getElementById('game_stage');
@@ -34,5 +37,20 @@ function mouseDragged(){
 }
 
 function draw(){
-	
+	background(220);
+	ellipse(x, y, 50, 50)
+}
+
+function keyPressed() {
+	if (keyCode === UP_ARROW) {
+	 	y = y - 10;
+	}
+	else if (keyCode === DOWN_ARROW) {
+		y = y + 10;
+	}
+	if (keyCode === LEFT_ARROW) {
+		x = x - 10;
+	} else if (keyCode === RIGHT_ARROW) {
+		x = x + 10;
+	}
 }
