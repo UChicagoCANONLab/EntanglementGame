@@ -4,7 +4,8 @@ function setup(){
 
 	var canvasDiv = document.getElementById('game_stage');
     var width = canvasDiv.offsetWidth;
-    var game_canvas = createCanvas(width,400);
+    //var game_canvas = createCanvas(width,600);
+    var game_canvas = createCanvas(650,650);
 	game_canvas.parent("game_stage");
 	background(51);
 
