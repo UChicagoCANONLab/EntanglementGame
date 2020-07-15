@@ -139,7 +139,7 @@ function setup(){
 	game_canvas.parent("game_stage");
 	background(51);
 
-	socket = io.connect('http://localhost:3000');
+	socket = io.connect('https://entanglement-game.herokuapp.com/');
 	socket.on('position', adjustPos)
 	socket.on('chat', handleChat)
 
