@@ -4,7 +4,7 @@ var x = 0;
 var y = 0;
 
 var player_img
-
+var maze_img
 
 var computer_img
 var experiment_img
@@ -18,6 +18,17 @@ var telescope_img
 var walkie_talkie_img
 var water_img
 var wrench_img
+
+var mat_1a
+var mat_2a
+var mat_3a
+var mat_4a
+var mat_1b
+var mat_2b
+var mat_3b
+var mat_4b
+var wall_matrix_a
+var wall_matrix_b
 
 
 var computer = {
