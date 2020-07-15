@@ -108,6 +108,7 @@ var wrench = {
 
 
 function preload() {
+	/*
 	player_img = loadImage('../res/p1.png');
 	computer_img = loadImage(computer.img_path);
 	experiment_img = loadImage(experiment.img_path);
@@ -120,6 +121,7 @@ function preload() {
 	walkie_talkie_img = loadImage(walkie_talkie.img_path);
 	water_img = loadImage(water.img_path);
 	wrench_img = loadImage(wrench.img_path);
+	*/
 	
 	// determine which level is currently being played
 	// load background image of level x's maze
