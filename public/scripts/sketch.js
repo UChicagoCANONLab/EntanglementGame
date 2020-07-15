@@ -121,6 +121,9 @@ function preload() {
 	water_img = loadImage(water.img_path);
 	wrench_img = loadImage(wrench.img_path);
 	
+	// determine which level is currently being played
+	// load background image of level x's maze
+	// set wall_matrix_a and wall_matrix_b to mat_x_a and mat_x_b
 	
 }
 
