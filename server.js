@@ -14,7 +14,6 @@ var io = socket(server);
 io.sockets.on('connection', newConnection);
 
 function newConnection(socket){
-	console.log('new connection: ' + socket.id)
 
 	socket.on('position', posMsg)
 	socket.on('chat', chatMsg)
@@ -26,7 +25,6 @@ function newConnection(socket){
 
 	function chatMsg(data){
 		socket.broadcast.emit('chat', data)
-		console.log(data);
 	}
 
 }
