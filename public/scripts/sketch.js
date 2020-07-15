@@ -108,8 +108,9 @@ var wrench = {
 
 
 function preload() {
-	/*
+	
 	player_img = loadImage('../res/p1.png');
+	/*
 	computer_img = loadImage(computer.img_path);
 	experiment_img = loadImage(experiment.img_path);
 	first_aid_img = loadImage(first_aid.img_path);
