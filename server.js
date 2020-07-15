@@ -18,7 +18,6 @@ function newConnection(socket){
 
 	function posMsg(data){
 		socket.broadcast.emit('position', data)
-		console.log(data);
 	}
 
 	function chatMsg(data){
