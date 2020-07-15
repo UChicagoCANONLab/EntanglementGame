@@ -60,9 +60,4 @@ function writeChat(data, player_num){
 	}
 	
 	updateScroll();
-	/*
-	xmlString = "<div class='alert alert-primary' role='alert'><b>Player 1: </b>" + data + "</div>"
-	msg_object = new DOMParser().parseFromString(xmlString, "text/xml");
-	document.getElementById("chatbox_container_inner").appendChild(msg_object);
-	*/
 }
