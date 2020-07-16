@@ -160,7 +160,39 @@ function setup(){
     var game_canvas = createCanvas(648,648);
 	game_canvas.parent("game_stage");
 
-	maze_img = loadImage('../res/Maze_A.png');
+	if (level_num == 1) {
+		if (teammate_connected == true) {
+			maze_img = loadImage('../res/Maze_1A.png');
+		}
+		else {
+			maze_img = loadImage('../res/Maze_1B.png');
+		}
+	}
+	if (level_num == 2) {
+		if (teammate_connected == true) {
+			maze_img = loadImage('../res/Maze_2A.png');
+		}
+		else {
+			maze_img = loadImage('../res/Maze_2B.png');
+		}
+	}
+	if (level_num == 3) {
+		if (teammate_connected == true) {
+			maze_img = loadImage('../res/Maze_3A.png');
+		}
+		else {
+			maze_img = loadImage('../res/Maze_3B.png');
+		}
+	}
+	if (level_num == 4) {
+		if (teammate_connected == true) {
+			maze_img = loadImage('../res/Maze_4A.png');
+		}
+		else {
+			maze_img = loadImage('../res/Maze_4B.png');
+		}
+	}
+	
 
 	socket = io.connect('https://entanglement-game.herokuapp.com/');
 	socket.on('position', adjustPos)
