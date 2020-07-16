@@ -206,7 +206,16 @@ function setup(){
 	socket = io.connect('https://entanglement-game.herokuapp.com/');
 	socket.on('position', adjustPos)
 	socket.on('chat', handleChat)
+	socket.on('joined', teammateJoined)
 
+}
+
+function teammateJoined(data){
+	console.log("teammate joined")
+	x = 12;
+	y = 12;
+	x_mat = 0;
+	y_mat = 0;
 }
 
 function draw(){
@@ -215,63 +224,66 @@ function draw(){
 }
 
 function keyPressed() {
-	if (keyCode === UP_ARROW) {
-		if ((!(y - 72 < 0))&&(wall_matrix_a[y_mat-1][x_mat] != 1)) {
-			y = y - 72;
-			y_mat = y_mat - 2;
+	if (teammate_connected) {
+		if (keyCode === UP_ARROW) {
+			if ((!(y - 72 < 0))&&(wall_matrix_a[y_mat-1][x_mat] != 1)) {
+				y = y - 72;
+				y_mat = y_mat - 2;
+			}
 		}
-	}
-	else if (keyCode === DOWN_ARROW) {
-		if ((!(y + 72 >= 648))&&(wall_matrix_a[y_mat+1][x_mat] != 1)) {
-			y = y + 72;
-			y_mat = y_mat + 2;
+		else if (keyCode === DOWN_ARROW) {
+			if ((!(y + 72 >= 648))&&(wall_matrix_a[y_mat+1][x_mat] != 1)) {
+				y = y + 72;
+				y_mat = y_mat + 2;
+			}
 		}
-	}
-	if (keyCode === LEFT_ARROW) {
-		if ((!(x - 72 < 0))&&(wall_matrix_a[y_mat][x_mat-1] != 1)) {
-			x = x - 72;
-			x_mat = x_mat - 2;
+		if (keyCode === LEFT_ARROW) {
+			if ((!(x - 72 < 0))&&(wall_matrix_a[y_mat][x_mat-1] != 1)) {
+				x = x - 72;
+				x_mat = x_mat - 2;
+			}
 		}
-	}
-	else if (keyCode === RIGHT_ARROW) {
-		if ((!(x + 72 >= 648))&&(wall_matrix_a[y_mat][x_mat+1] != 1)) {
-			x = x + 72;
-			x_mat = x_mat + 2;
+		else if (keyCode === RIGHT_ARROW) {
+			if ((!(x + 72 >= 648))&&(wall_matrix_a[y_mat][x_mat+1] != 1)) {
+				x = x + 72;
+				x_mat = x_mat + 2;
+			}
 		}
-	}
 
 
-	//debugging master control keys (allow to pass through walls)
-	if (key == 'w') {
-		if (!(y - 72 < 0)) {
-			y = y - 72;
-			y_mat = y_mat - 2;
+		//debugging master control keys (allow to pass through walls)
+		if (key == 'w') {
+			if (!(y - 72 < 0)) {
+				y = y - 72;
+				y_mat = y_mat - 2;
+			}
 		}
-	}
-	else if (key == 's') {
-		if (!(y + 72 >= 648)) {
-			y = y + 72;
-			y_mat = y_mat + 2;
+		else if (key == 's') {
+			if (!(y + 72 >= 648)) {
+				y = y + 72;
+				y_mat = y_mat + 2;
+			}
 		}
-	}
-	if (key == 'a') {
-		if (!(x - 72 < 0)) {
-			x = x - 72;
-			x_mat = x_mat - 2;
+		if (key == 'a') {
+			if (!(x - 72 < 0)) {
+				x = x - 72;
+				x_mat = x_mat - 2;
+			}
 		}
-	}
-	else if (key == 'd') {
-		if (!(x + 72 >= 648)) {
-			x = x + 72;
-			x_mat = x_mat + 2;
+		else if (key == 'd') {
+			if (!(x + 72 >= 648)) {
+				x = x + 72;
+				x_mat = x_mat + 2;
+			}
 		}
-	}
 
-	var data = {
-		x: x,
-		y: y
+		var data = {
+			x: x,
+			y: y
+		}
+		socket.emit('position', data)
 	}
-	socket.emit('position', data)
+	
 }
 
 function adjustPos(data){
