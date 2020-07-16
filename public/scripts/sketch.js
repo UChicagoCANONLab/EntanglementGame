@@ -2,6 +2,9 @@ var socket;
 
 var x = 12;
 var y = 12;
+var level_num = 1;
+var teammate_connected = false;
+var game_code = "";
 
 var player_img
 var maze_img
