@@ -226,8 +226,36 @@ function keyPressed() {
 		}
 	}
 	else if (keyCode === RIGHT_ARROW) {
+		if ((!(x + 72 >= 648))&&(wall_matrix_a[y_mat][x_mat+1] != 1)) {
+			x = x + 72;
+			x_mat = x_mat + 2;
+		}
+	}
+
+
+	//debugging master control keys (allow to pass through walls)
+	if (key == 'w') {
+		if (!(y - 72 < 0)) {
+			y = y - 72;
+			y_mat = y_mat - 2;
+		}
+	}
+	else if (key == 's') {
+		if (!(y + 72 >= 648)) {
+			y = y + 72;
+			y_mat = y_mat + 2;
+		}
+	}
+	if (key == 'a') {
+		if (!(x - 72 < 0)) {
+			x = x - 72;
+			x_mat = x_mat - 2;
+		}
+	}
+	else if (key == 'd') {
 		if (!(x + 72 >= 648)) {
 			x = x + 72;
+			x_mat = x_mat + 2;
 		}
 	}
 
