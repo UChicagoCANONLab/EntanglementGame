@@ -13,6 +13,8 @@ io.sockets.on('connection', newConnection);
 
 function newConnection(socket){
 
+	socket.broadcast.emit('joined', 'new_p')
+
 	socket.on('position', posMsg)
 	socket.on('chat', chatMsg)
 
