@@ -2,6 +2,9 @@ var socket;
 
 var x = 12;
 var y = 12;
+var x_mat = 0;
+var y_mat = 0;
+
 var level_num = 1;
 var teammate_connected = false;
 var game_code = "";
@@ -131,7 +134,6 @@ var wrench = {
 function preload() {
 	
 	player_img = loadImage('../res/p1.png');
-	/*
 	computer_img = loadImage(computer.img_path);
 	experiment_img = loadImage(experiment.img_path);
 	first_aid_img = loadImage(first_aid.img_path);
@@ -143,7 +145,6 @@ function preload() {
 	walkie_talkie_img = loadImage(walkie_talkie.img_path);
 	water_img = loadImage(water.img_path);
 	wrench_img = loadImage(wrench.img_path);
-	*/
 	
 	// determine which level is currently being played
 	// load background image of level x's maze
@@ -207,18 +208,21 @@ function draw(){
 
 function keyPressed() {
 	if (keyCode === UP_ARROW) {
-		if (!(y - 72 < 0)) {
+		if ((!(y - 72 < 0))&&(wall_matrix_a[y_mat-1][x_mat] != 1)) {
 			y = y - 72;
+			y_mat = y_mat - 2;
 		}
 	}
 	else if (keyCode === DOWN_ARROW) {
-		if (!(y + 72 >= 648)) {
+		if ((!(y + 72 >= 648))&&(wall_matrix_a[y_mat+1][x_mat] != 1)) {
 			y = y + 72;
+			y_mat = y_mat + 2;
 		}
 	}
 	if (keyCode === LEFT_ARROW) {
-		if (!(x - 72 < 0)) {
+		if ((!(x - 72 < 0))&&(wall_matrix_a[y_mat][x_mat-1] != 1)) {
 			x = x - 72;
+			x_mat = x_mat - 2;
 		}
 	}
 	else if (keyCode === RIGHT_ARROW) {
