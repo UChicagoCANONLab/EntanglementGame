@@ -1,7 +1,7 @@
 var socket;
 
-var x = 0;
-var y = 0;
+var x = 12;
+var y = 12;
 
 var player_img
 var maze_img
@@ -19,7 +19,25 @@ var walkie_talkie_img
 var water_img
 var wrench_img
 
-var mat_1a
+var mat_1a = [
+				[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+				[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+				[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+				[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+				[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+				[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+				[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+				[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+				[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+				[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+				[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+				[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+				[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+				[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+				[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+				[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+				[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+			]
 var mat_2a
 var mat_3a
 var mat_4a
@@ -126,7 +144,8 @@ function preload() {
 	
 	// determine which level is currently being played
 	// load background image of level x's maze
-	// set wall_matrix_a and wall_matrix_b to mat_x_a and mat_x_b
+	// set wall_matrix_a and wall_matrix_b to mat_xa and mat_xb
+	wall_matrix_a = mat_1a
 	
 }
 
@@ -137,7 +156,8 @@ function setup(){
     //var game_canvas = createCanvas(width,600);
     var game_canvas = createCanvas(648,648);
 	game_canvas.parent("game_stage");
-	background(51);
+
+	maze_img = loadImage('../res/Maze_A.png');
 
 	socket = io.connect('https://entanglement-game.herokuapp.com/');
 	socket.on('position', adjustPos)
@@ -146,8 +166,8 @@ function setup(){
 }
 
 function draw(){
-	background(220);
-	image(player_img, x, y, 72, 72);
+	background(maze_img);
+	image(player_img, x, y, 60, 60);
 }
 
 function keyPressed() {
