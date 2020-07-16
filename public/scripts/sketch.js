@@ -64,7 +64,7 @@ var computer = {
 
 var experiment = {
   name: 'Experiment',
-  img_path : '../res/Experiment.png',
+  img_path : '../res/experiment.png',
   collected : false,
   location : [0,0]
 };
@@ -76,7 +76,7 @@ var first_aid = {
 };
 var flag = {
   name: 'Flag',
-  img_path : '../res/Flag.png',
+  img_path : '../res/flag.png',
   collected : false,
   location : [0,0]
 };
@@ -124,7 +124,7 @@ var water = {
 };
 var wrench = {
   name: 'Wrench',
-  img_path : '../res/Wrench.png',
+  img_path : '../res/wrench.png',
   collected : false,
   location : [0,0]
 };
