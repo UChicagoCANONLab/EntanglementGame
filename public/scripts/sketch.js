@@ -195,13 +195,18 @@ function setup(){
 	}
 
 	if (teammate_connected) {
+		document.getElementById('teammate_connected_status_div').innerHTML = "Teammate Connected: <div class='alert alert-success' role='alert'>Yes</div>"
 		for (var r = 0; r < 17; i++) {
 			for (var c = 0; c < 17; i++) {
 
 			}
 		}
 	}
+	else {
+		document.getElementById('teammate_connected_status_div').innerHTML = "Teammate Connected: <div class='alert alert-warning' role='alert'>Not yet</div>"
+	}
 
+	document.getElementById('level_num_div').innerHTML = "Level: <div class='alert alert-info' role='alert'>"+level_num+"</div>"
 
 	// socket = io.connect('https://entanglement-game.herokuapp.com/');
 	socket = io.connect('localhost:3000');
@@ -228,6 +233,8 @@ function setup(){
 //
 // 	socket.on('error', (data) => alert(data.message));
 /// ---------------------END ROOM ADDITIONS ------------------------------
+
+}
 
 function teammateJoined(data){
 	x = 12;
