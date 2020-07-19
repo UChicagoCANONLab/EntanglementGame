@@ -132,7 +132,7 @@ var wrench = {
 
 
 function preload() {
-	
+
 	player_img = loadImage('../res/p1.png');
 	computer_img = loadImage(computer.img_path);
 	experiment_img = loadImage(experiment.img_path);
@@ -145,12 +145,12 @@ function preload() {
 	walkie_talkie_img = loadImage(walkie_talkie.img_path);
 	water_img = loadImage(water.img_path);
 	wrench_img = loadImage(wrench.img_path);
-	
+
 	// determine which level is currently being played
 	// load background image of level x's maze
 	// set wall_matrix_a and wall_matrix_b to mat_xa and mat_xb
 	wall_matrix_a = mat_1a
-	
+
 }
 
 function setup(){
@@ -201,21 +201,40 @@ function setup(){
 			}
 		}
 	}
-	
 
-	socket = io.connect('https://entanglement-game.herokuapp.com/');
+
+	// socket = io.connect('https://entanglement-game.herokuapp.com/');
+	socket = io.connect('localhost:3000');
 	socket.on('position', adjustPos)
 	socket.on('chat', handleChat)
 	socket.on('joined', teammateJoined)
 
-}
+	/// ---------------------START ROOM ADDITIONS ------------------------------
+// 	socket.emit('createNewGame');
+// 	socket.on('newGameCreated', (data) => {
+// 		const statusCard = document.getElementById("clientGameID")
+// 		statusCard.innerHTML = `Your GameID = ${data.gameID}`;
+// 	})
+//
+// }
+//
+// function changeGameID(){
+// 	const newGameId = document.getElementById("newGameID").value;
+// 	var data = {
+// 		gameID: newGameID,
+// 	}
+// 	socket.emit('joinGame', data);
+// }
+//
+// 	socket.on('error', (data) => alert(data.message));
+/// ---------------------END ROOM ADDITIONS ------------------------------
 
 function teammateJoined(data){
-	console.log("teammate joined")
 	x = 12;
 	y = 12;
 	x_mat = 0;
 	y_mat = 0;
+	teammate_connected = true;
 }
 
 function draw(){
@@ -283,7 +302,7 @@ function keyPressed() {
 		}
 		socket.emit('position', data)
 	}
-	
+
 }
 
 function adjustPos(data){
