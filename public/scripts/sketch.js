@@ -189,33 +189,41 @@ function setup(){
 	if (level_num == 1) {
 		if (teammate_connected == false) {
 			maze_img = loadImage('../res/Maze_1A.png');
+			wall_matrix = mat_1a
 		}
 		else {
 			maze_img = loadImage('../res/Maze_1B.png');
+			wall_matrix = mat_1b
 		}
 	}
 	if (level_num == 2) {
 		if (teammate_connected == false) {
 			maze_img = loadImage('../res/Maze_2A.png');
+			wall_matrix = mat_2a
 		}
 		else {
 			maze_img = loadImage('../res/Maze_2B.png');
+			wall_matrix = mat_2b
 		}
 	}
 	if (level_num == 3) {
 		if (teammate_connected == false) {
 			maze_img = loadImage('../res/Maze_3A.png');
+			wall_matrix = mat_3a
 		}
 		else {
 			maze_img = loadImage('../res/Maze_3B.png');
+			wall_matrix = mat_3b
 		}
 	}
 	if (level_num == 4) {
 		if (teammate_connected == false) {
 			maze_img = loadImage('../res/Maze_4A.png');
+			wall_matrix = mat_4a
 		}
 		else {
 			maze_img = loadImage('../res/Maze_4B.png');
+			wall_matrix = mat_4b
 		}
 	}
 
