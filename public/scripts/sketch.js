@@ -337,6 +337,10 @@ function keyPressed() {
 				x_mat = x_mat + 2;
 			}
 		}
+		
+		if (wall_matrix[y_mat][x_mat] != 1 && wall_matrix[y_mat][x_mat] != 0) {
+			eval(wall_matrix[y_mat][x_mat]+"['collected']=true");
+		}
 
 
 		//debugging master control keys (allow to pass through walls)
