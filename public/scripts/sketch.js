@@ -304,6 +304,7 @@ function draw(){
 				item_x_loc = item['location'][0]*72;
 				item_y_loc = item['location'][1]*72;
 				eval("image("+item_img_name+","+item_x_loc+","+item_y_loc+", 72, 72)");
+				eval("image("+item_img_name+","+item_y_loc+","+item_x_loc+", 72, 72)");
 			}
 		}
 	}
