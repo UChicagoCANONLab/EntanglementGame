@@ -59,7 +59,8 @@ var computer = {
   img_path : '../res/Computer.png',
   img_name : 'computer_img',
   collected : false,
-  location : [0,0]
+  location : [0,0],
+  on_board : false,
 };
 
 var experiment = {
@@ -67,77 +68,88 @@ var experiment = {
   img_path : '../res/experiment.png',
   img_name : 'experiment_img',
   collected : false,
-  location : [0,0]
+  location : [0,0],
+  on_board : false
 };
 var first_aid = {
   name: 'First Aid Kit',
   img_path : '../res/First aid.png',
   img_name : 'first_aid_img',
   collected : false,
-  location : [0,0]
+  location : [0,0],
+  on_board : false
 };
 var flag = {
   name: 'Flag',
   img_path : '../res/flag.png',
   img_name : 'flag_img',
   collected : false,
-  location : [0,0]
+  location : [0,0],
+  on_board : false
 };
 var fuel = {
   name: 'Fuel Tank',
   img_path : '../res/Fuel.png',
   img_name : 'fuel_img',
   collected : false,
-  location : [0,0]
+  location : [0,0],
+  on_board : false
 };
 var manual = {
   name: 'Ship Manual',
   img_path : '../res/manual.png',
   img_name : 'manual_img',
   collected : false,
-  location : [0,0]
+  location : [0,0],
+  on_board : false
 };
 var map = {
   name: 'Space Map',
   img_path : '../res/Map.png',
   img_name : 'mapp_img',
   collected : false,
-  location : [0,0]
+  location : [0,0],
+  on_board : false
 };
 var moon_rock = {
   name: 'Moon Rock',
   img_path : '../res/Moon rock.png',
   img_name : 'moon_rock_img',
   collected : false,
-  location : [0,0]
+  location : [0,0],
+  on_board : false
 };
 var telescope = {
   name: 'Telescope',
   img_path : '../res/telescope.png',
   img_name : 'telescope_img',
   collected : false,
-  location : [0,0]
+  location : [0,0],
+  on_board : false
 };
 var walkie_talkie = {
   name: 'Walkie Talkie',
   img_path : '../res/Walkie talkie.png',
   img_name : 'walkie_talkie_img',
   collected : false,
-  location : [0,0]
+  location : [0,0],
+  on_board : false
 };
 var water = {
   name: 'Water Bottle',
   img_path : '../res/Water.png',
   img_name : 'water_img',
   collected : false,
-  location : [0,0]
+  location : [0,0],
+  on_board : false
 };
 var wrench = {
   name: 'Wrench',
   img_path : '../res/wrench.png',
   img_name : 'wrench_img',
   collected : false,
-  location : [0,0]
+  location : [0,0],
+  on_board : false
 };
 
 
