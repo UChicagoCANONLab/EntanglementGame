@@ -163,6 +163,7 @@ function preload() {
 	experiment_img = loadImage(experiment.img_path);
 	first_aid_img = loadImage(first_aid.img_path);
 	flag_img = loadImage(flag.img_path);
+	fuel_img = loadImage(fuel.img_path);
 	manual_img = loadImage(manual.img_path);
 	mapp_img = loadImage(mapp.img_path);
 	moon_rock_img = loadImage(moon_rock.img_path);
