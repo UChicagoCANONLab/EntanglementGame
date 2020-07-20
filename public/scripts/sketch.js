@@ -235,9 +235,14 @@ function setup(){
 
 	if (teammate_connected) {
 		document.getElementById('teammate_connected_status_div').innerHTML = "Teammate Connected: <div class='alert alert-success' role='alert'>Yes</div>"
-		for (var r = 0; r < 17; i++) {
-			for (var c = 0; c < 17; i++) {
-
+		for (var r = 0; r < 17; r++) {
+			for (var c = 0; c < 17; c++) {
+				//if item goes here, set item loc in item dict, 
+				if(wall_matrix[r][c] != 0 && wall_matrix[r][c] != 1) {
+					item_name =  wall_matrix[r][c]
+					eval(item_name+"['on_board']=true");
+					eval(item_name+"['location']=["+(r/2).toString()+","+(c/2).toString()+"]");
+				}
 			}
 		}
 	}
@@ -273,6 +278,7 @@ function setup(){
 // 	socket.on('error', (data) => alert(data.message));
 /// ---------------------END ROOM ADDITIONS ------------------------------
 
+	redraw();
 	noLoop();
 
 }
