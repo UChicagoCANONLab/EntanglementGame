@@ -371,6 +371,8 @@ function keyPressed() {
 		socket.emit('position', data)
 	}
 
+	redraw()
+
 }
 
 function adjustPos(data){
