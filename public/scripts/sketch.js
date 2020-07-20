@@ -174,7 +174,7 @@ function preload() {
 	// determine which level is currently being played
 	// load background image of level x's maze
 	// set wall_matrix_a and wall_matrix_b to mat_xa and mat_xb
-	wall_matrix_a = mat_1a
+	//wall_matrix_a = mat_1a
 
 }
 
