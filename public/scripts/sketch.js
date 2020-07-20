@@ -293,6 +293,20 @@ function teammateJoined(data){
 
 function draw(){
 	background(maze_img);
+
+	//go through all items and if not collected, get location from each and draw it there
+	for (const item_num in items) {
+		if (items[item_num]['on_board'] == true) {
+			if (items[item_num]['collected'] == false) {
+				item = items[item_num];
+				item_img_name = item['img_name'];
+				item_x_loc = item['location'][0]*72;
+				item_y_loc = item['location'][1]*72;
+				eval("image("+item_img_name+","+item_x_loc+","+item_y_loc+", 72, 72)");
+			}
+		}
+	}
+	
 	image(player_img, x, y, 60, 60);
 }
 
