@@ -152,6 +152,8 @@ var wrench = {
   on_board : false
 };
 
+items = [computer, experiment, first_aid, flag, fuel, manual, mapp, moon_rock, telescope, walkie_talkie, water, wrench];
+
 
 
 function preload() {
