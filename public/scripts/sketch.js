@@ -227,6 +227,12 @@ function setup(){
 		}
 	}
 
+	// these hard sets are just for testing
+	maze_img = loadImage('../res/Maze_1A.png');
+	wall_matrix = mat_1a
+
+	background(maze_img);
+
 	if (teammate_connected) {
 		document.getElementById('teammate_connected_status_div').innerHTML = "Teammate Connected: <div class='alert alert-success' role='alert'>Yes</div>"
 		for (var r = 0; r < 17; i++) {
