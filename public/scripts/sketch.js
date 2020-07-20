@@ -51,8 +51,7 @@ var mat_1b
 var mat_2b
 var mat_3b
 var mat_4b
-var wall_matrix_a
-var wall_matrix_b
+var wall_matrix
 
 
 var computer = {
