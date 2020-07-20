@@ -42,7 +42,7 @@ var mat_1a = [
 				[1,0,1,0,0,0,0,0,0,0,1,0,1,0,1,0,0], // wall
 				[0,0,0,1,0,0,0,1,0,0,0,1,0,0,0,0,0], // row 8
 				[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], // wall
-				[0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,'map_img'], // row 9
+				[0,0,0,0,0,0,0,1,0,0,0,1,0,0,0,0,'mapp'], // row 9
 			]
 var mat_2a
 var mat_3a
@@ -103,7 +103,7 @@ var manual = {
   location : [0,0],
   on_board : false
 };
-var map = {
+var mapp = {
   name: 'Space Map',
   img_path : '../res/Map.png',
   img_name : 'mapp_img',
@@ -162,7 +162,7 @@ function preload() {
 	first_aid_img = loadImage(first_aid.img_path);
 	flag_img = loadImage(flag.img_path);
 	manual_img = loadImage(manual.img_path);
-	map_img = loadImage('../res/Map.png');
+	mapp_img = loadImage(mapp.img_path);
 	moon_rock_img = loadImage(moon_rock.img_path);
 	telescope_img = loadImage(telescope.img_path);
 	walkie_talkie_img = loadImage(walkie_talkie.img_path);
