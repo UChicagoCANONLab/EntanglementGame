@@ -5,8 +5,8 @@ var y = 12;
 var x_mat = 0;
 var y_mat = 0;
 
-var level_num = 1;
-var teammate_connected = false;
+var level_num = 1; //when timer runs out, level alert in status card changes to "Continue to Level X+1" button
+var teammate_connected = true;
 var game_code = "";
 
 var player_img
