@@ -257,6 +257,8 @@ function setup(){
 // 	socket.on('error', (data) => alert(data.message));
 /// ---------------------END ROOM ADDITIONS ------------------------------
 
+	noLoop();
+
 }
 
 function teammateJoined(data){
