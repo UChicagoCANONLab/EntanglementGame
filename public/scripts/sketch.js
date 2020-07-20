@@ -313,25 +313,25 @@ function draw(){
 function keyPressed() {
 	if (teammate_connected) {
 		if (keyCode === UP_ARROW) {
-			if ((!(y - 72 < 0))&&(wall_matrix_a[y_mat-1][x_mat] != 1)) {
+			if ((!(y - 72 < 0))&&(wall_matrix[y_mat-1][x_mat] != 1)) {
 				y = y - 72;
 				y_mat = y_mat - 2;
 			}
 		}
 		else if (keyCode === DOWN_ARROW) {
-			if ((!(y + 72 >= 648))&&(wall_matrix_a[y_mat+1][x_mat] != 1)) {
+			if ((!(y + 72 >= 648))&&(wall_matrix[y_mat+1][x_mat] != 1)) {
 				y = y + 72;
 				y_mat = y_mat + 2;
 			}
 		}
 		if (keyCode === LEFT_ARROW) {
-			if ((!(x - 72 < 0))&&(wall_matrix_a[y_mat][x_mat-1] != 1)) {
+			if ((!(x - 72 < 0))&&(wall_matrix[y_mat][x_mat-1] != 1)) {
 				x = x - 72;
 				x_mat = x_mat - 2;
 			}
 		}
 		else if (keyCode === RIGHT_ARROW) {
-			if ((!(x + 72 >= 648))&&(wall_matrix_a[y_mat][x_mat+1] != 1)) {
+			if ((!(x + 72 >= 648))&&(wall_matrix[y_mat][x_mat+1] != 1)) {
 				x = x + 72;
 				x_mat = x_mat + 2;
 			}
