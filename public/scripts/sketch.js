@@ -358,7 +358,6 @@ function changeGameID(){
 }
 
 function teammateJoined(data){
-	console.log('teammate joined')
 	alert("Both players have joined! [story story story]. Once both players have pressed 'OK,' the timer will start and you can press any key to show the board!");
 	teammate_connected = true;
 	gameItems = data.gameItems
@@ -371,11 +370,12 @@ function startTimer() {
 	num_players_ready += 1;
 	if (num_players_ready == 2){
 		allow_movement = true;
-		console.log('starting timer');
+		document.getElementById('waitingalert').style.displau = "none";
+		document.getElementById('counter').style.display = "block";
+		countdown(2);
 		nextItem();
 	}
 	else {
-		console.log('waiting for other player');
 	}
 }
 
@@ -495,4 +495,23 @@ function nextItem() {
 	else {
 		document.getElementById('item_descrip').innerHTML = "The item is on your teammate's board! Follow their lead!";
 	}
+}
+
+function countdown(minutes) {
+    var seconds = 60;
+    var mins = minutes
+    function tick() {
+        var counter = document.getElementById("counter");
+        var current_minutes = mins-1
+        seconds--;
+        counter.innerHTML = current_minutes.toString() + ":" + (seconds < 10 ? "0" : "") + String(seconds);
+        if( seconds > 0 ) {
+            setTimeout(tick, 1000);
+        } else {
+            if(mins > 1){
+                countdown(mins-1);           
+            }
+        }
+    }
+    tick();
 }
