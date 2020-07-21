@@ -319,8 +319,9 @@ function setup(){
 	socket.on('teammateJoined', teammateJoined)
 	socket.on('joinResult', handleResult);
 	socket.on('startTimerMsg', startTimer);
-	socket.on('itemCollected', nextItem)
-	socket.on('gameOver', gameOver)
+	socket.on('itemCollected', nextItem);
+	socket.on('gameOver', gameOver);
+	socket.on('newLevel', handleLevelChange);
 
 
 
@@ -531,4 +532,18 @@ function gameOver(complete){
 	document.getElementById('infocard').style.display = "block";
 	document.getElementById('itemcard').style.display = "none";
 	document.getElementById('counter').style.display = "none";
+}
+
+function skipLevel() {
+	var data = {
+		current_level: level_num,
+		next_level: level_num+1,
+		gameID: gameID
+	}
+	socket.emit('levelChange', data);
+}
+
+function handleLevelChange(data) {
+	console.log("we should change levels");
+	console.log(data)
 }
