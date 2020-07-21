@@ -334,9 +334,9 @@ function handleResult(result) {
 		gameID = result.gameID;
 		player_num = result.player_num;
 		document.getElementById('gamecodediv').innerHTML = "Game Code: <div class='alert alert-warning' role='alert'>"+gameID+"</div>";
-		data = {gameID:gameID, gameItems: shuffle(items)}
-		teammateJoined(data);
+		data = {gameID:gameID, gameItems: shuffle(items)};
 		socket.emit('p2joined', data);
+		teammateJoined(data);
 	}
 	else if (result.status == 'created') {
 		alert("Succesfully created new game.");
@@ -358,7 +358,7 @@ function changeGameID(){
 }
 
 function teammateJoined(data){
-	console.log('alljoined')
+	console.log('teammate joined')
 	alert("Both players have joined! [story story story]. Once both players have pressed 'OK,' the timer will start and you can press any key to show the board!");
 	teammate_connected = true;
 	gameItems = data.gameItems
