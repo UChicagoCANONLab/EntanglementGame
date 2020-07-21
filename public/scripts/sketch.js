@@ -181,13 +181,14 @@ function preload() {
 }
 
 function setup(){
-	console.log("setting up")
 
 	var canvasDiv = document.getElementById('game_stage');
     var width = canvasDiv.offsetWidth;
     //var game_canvas = createCanvas(width,600);
     var game_canvas = createCanvas(648,648);
 	game_canvas.parent("game_stage");
+
+	console.log(player_num)
 
 	if (level_num == 1) {
 		if (player_num == 1) {
@@ -231,8 +232,8 @@ function setup(){
 	}
 
 	// these hard sets are just for testing
-	maze_img = loadImage('../res/Maze_1A.png');
-	wall_matrix = mat_1a
+	// maze_img = loadImage('../res/Maze_1A.png');
+	// wall_matrix = mat_1a
 
 	background(maze_img);
 
@@ -255,14 +256,13 @@ function setup(){
 
 	document.getElementById('level_num_div').innerHTML = "Level: <div class='alert alert-info' role='alert'>"+level_num+"</div>"
 
-	socket = io.connect('https://entanglement-game.herokuapp.com/');
-	//socket = io.connect('localhost:3000');
+	//socket = io.connect('https://entanglement-game.herokuapp.com/');
+	socket = io.connect('localhost:3000');
 	socket.on('position', adjustPos)
 	socket.on('chat', handleChat)
 	socket.on('teammateJoined', teammateJoined)
 	socket.on('joinResult', handleResult);
 
-	redraw();
 	noLoop();
 
 }
@@ -294,21 +294,30 @@ function changeGameID(){
 	}
 	socket.emit('joinGame', data);
 }
-/// ---------------------END ROOM ADDITIONS ------------------------------
-
 	
 
 function teammateJoined(data){
-	x = 12;
-	y = 12;
-	x_mat = 0;
-	y_mat = 0;
+	console.log("running teammate joined")
+	var data = {
+		x: 12,
+		y: 12,
+		x_mat: 0,
+		y_mat: 0,
+		gameID: gameID 
+	}
+	setup();
+	redraw();
+	//socket.emit('position', data)
 	teammate_connected = true;
-	setup()
+	
 }
 
 function draw(){
 	background(maze_img);
+
+	if (wall_matrix[y_mat][x_mat] != 1 && wall_matrix[y_mat][x_mat] != 0) {
+		eval(wall_matrix[y_mat][x_mat]+"['collected']=true");
+	}
 
 	//go through all items and if not collected, get location from each and draw it there
 	for (const item_num in items) {
@@ -353,11 +362,6 @@ function keyPressed() {
 			}
 		}
 
-		if (wall_matrix[y_mat][x_mat] != 1 && wall_matrix[y_mat][x_mat] != 0) {
-			eval(wall_matrix[y_mat][x_mat]+"['collected']=true");
-		}
-
-
 		//debugging master control keys (allow to pass through walls)
 		if (key == 'w') {
 			if (!(y - 72 < 0)) {
@@ -386,18 +390,22 @@ function keyPressed() {
 
 		var data = {
 			x: x,
-			y: y
+			y: y,
+			x_mat: x_mat,
+			y_mat: y_mat,
+			gameID: gameID 
 		}
 		socket.emit('position', data)
 	}
-
-	redraw()
 
 }
 
 function adjustPos(data){
 	x = data.x;
 	y = data.y;
+	x_mat = data.x_mat;
+	y_mat = data.y_mat;
+	redraw()
 }
 
 function nextItem() {
