@@ -9,6 +9,8 @@ var level_num = 1; //when timer runs out, level alert in status card changes to 
 var teammate_connected = false;
 var player_num;
 var gameID = "";
+var gameItems;
+var itemIDX = 0;
 
 var player_img
 var maze_img
@@ -308,8 +310,8 @@ function setup(){
 
 	document.getElementById('level_num_div').innerHTML = "Level: <div class='alert alert-info' role='alert'>"+level_num+"</div>"
 
-	socket = io.connect('https://entanglement-game.herokuapp.com/');
-	//socket = io.connect('localhost:3000');
+	// socket = io.connect('https://entanglement-game.herokuapp.com/');
+	socket = io.connect('localhost:3000');
 	socket.on('position', adjustPos)
 	socket.on('chat', handleChat)
 	socket.on('teammateJoined', teammateJoined)
@@ -326,7 +328,8 @@ function handleResult(result) {
 		player_num = result.player_num;
 		document.getElementById('gamecodediv').innerHTML = "Game Code: <div class='alert alert-warning' role='alert'>"+gameID+"</div>";
 		teammateJoined();
-		socket.emit('p2joined',{gameID:gameID});
+		gameItems = shuffle(items);
+		socket.emit('p2joined',{gameID:gameID, gameItems: gameItems});
 	}
 	else if (result.status == 'created') {
 		alert("Succesfully created new game.");
@@ -356,6 +359,8 @@ function teammateJoined(data){
 	// 	gameID: gameID
 	// }
 	teammate_connected = true;
+	gameItems = data.gameItems
+	nextItem();
 	setup();
 	redraw();
 	//socket.emit('position', data)
@@ -366,8 +371,15 @@ function teammateJoined(data){
 function draw(){
 	background(maze_img);
 
-	if (wall_matrix[y_mat][x_mat] != 1 && wall_matrix[y_mat][x_mat] != 0) {
+	if (wall_matrix[y_mat][x_mat] == gameItems[itemIDX]) {
 		eval(wall_matrix[y_mat][x_mat]+"['collected']=true");
+		itemIDX += 1;
+		if(itemIDX < gameItems.length){
+			nextItem();
+		} else {
+			//CHANGE THIS TO SOMETHING ELSE
+			alert("collected all the items!")
+		}
 	}
 
 	//go through all items and if not collected, get location from each and draw it there
@@ -460,18 +472,13 @@ function adjustPos(data){
 }
 
 function nextItem() {
-	const random_item = items[Math.floor(Math.random() * items.length)];
-	if (random_item['on_board'] == true) {
-		document.getElementById('item_name_tag').innerHTML = random_item['name'];
-		document.getElementById('item_img_tag').src = random_item['img_path'];
+	const current_item = gameItems[itemIDX];
+	document.getElementById('item_name_tag').innerHTML = current_item['name'];
+	document.getElementById('item_img_tag').src = current_item['img_path'];
+	if (current_item['on_board'] == true) {
 		document.getElementById('item_descrip').innerHTML = "Work with your teammate to get this item as fast as possible!";
 	}
 	else {
-		document.getElementById('item_name_tag').innerHTML = random_item['name'];
-		document.getElementById('item_img_tag').src = random_item['img_path'];
 		document.getElementById('item_descrip').innerHTML = "The item is on your teammate's board! Follow their lead!";
 	}
-	rand_item_name = random_item['name'];
-	rand_item_pic_path = random_item['img_path'];
-	// if on this board display item, if on other board, say "The item is your teammate's board! Follow their lead!"
 }
