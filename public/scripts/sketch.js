@@ -526,7 +526,7 @@ function gameOver(complete){
 	if(complete){
 		alert("YOU COLLECTED ALL THE ITEMS! Pick which level you want to play next.")
 	} else {
-		alert(`Time ran out but you to collected ${itemIDX +1} items! Pick which level to play next.`)
+		alert(`Time ran out but you to collected ${itemIDX} items! Pick which level to play next.`)
 	}
 	document.getElementById('infocard').style.display = "block";
 	document.getElementById('itemcard').style.display = "none";
