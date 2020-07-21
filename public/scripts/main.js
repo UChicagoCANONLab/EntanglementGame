@@ -66,16 +66,18 @@ function chatNo(){
 }
 
 function handleChat(data){
-	if (player_num == 1){
-		writeChat(data, 2);
+	if (data.player_num == player_num) {
+		writeChat(data.message_text, 'me')
 	}
-	else{
-		writeChat(data, 1);
+	else {
+		writeChat(data.message_text, 'teammate')
 	}
+	
+
 }
 
-function writeChat(data, player_num){
-	if (player_num == 1){
+function writeChat(data, who){
+	if (who == 'me'){
 		document.getElementById("chatbox_container_inner").innerHTML = document.getElementById("chatbox_container_inner").innerHTML+"<div class='alert alert-info' role='alert'><b>Me: </b>" + data + "</div>";
 	}
 	else{
