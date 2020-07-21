@@ -369,14 +369,16 @@ function teammateJoined(data){
 }
 
 function startTimer() {
+
 	num_players_ready += 1;
+	console.log(num_players_ready)
 	if (num_players_ready == 2){
 		allow_movement = true;
 		document.getElementById('waitingalert').style.display = "none";
 		document.getElementById('infocard').style.display = "none";
 		document.getElementById('itemcard').style.display = "block";
 		document.getElementById('counter').style.display = "block";
-		countdown(2);
+		countdown(5);
 		nextItem(itemIDX);
 	}
 	else {
