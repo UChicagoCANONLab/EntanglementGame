@@ -48,7 +48,25 @@ var mat_1a = [
 var mat_2a
 var mat_3a
 var mat_4a
-var mat_1b
+var mat_1b = [
+				[0,0,0,1,0,0,0,1,0,0,0,0,'mapp',1,0,0,0], // row 1
+				[0,0,0,1,0,0,0,1,0,0,0,0,0,1,0,0,0], // wall
+				[0,0,0,0,0,0,0,1,0,0,0,0,0,1,0,0,0], // row 2
+				[1,1,1,1,1,1,1,1,1,1,0,1,1,1,0,0,0], // wall
+				[0,0,0,1,'moon_rock',0,0,0,0,1,0,0,0,1,0,0,0], // row 3
+				[0,0,0,1,0,0,0,1,1,1,0,0,0,1,1,1,0], // wall
+				[0,0,0,1,0,0,0,1,0,1,0,0,0,1,0,0,0], // row 4
+				[1,1,0,1,1,1,0,1,0,1,1,1,1,1,0,0,0], // wall
+				['telescope',0,0,1,0,0,0,0,0,0,'walkie_talkie',0,0,1,0,0,0], // row 5
+				[0,0,0,1,1,1,1,1,1,1,0,0,0,1,1,1,1], // wall
+				[0,0,0,1,0,0,'water',0,0,1,0,0,0,1,'wrench',0,0], // row 6
+				[0,0,0,1,0,0,0,0,0,1,1,1,1,1,0,0,0], // wall
+				[0,0,0,1,0,0,0,0,0,1,0,0,0,1,0,0,0], // row 7
+				[1,1,1,1,0,1,1,1,1,1,0,0,0,1,1,1,0], // wall
+				[0,0,0,0,0,1,0,0,0,1,0,1,0,1,0,0,0], // row 8
+				[0,0,0,0,0,1,0,0,0,1,0,0,0,1,0,0,0], // wall
+				[0,0,0,0,0,1,0,0,0,0,0,0,0,1,0,0,0], // row 9
+			]
 var mat_2b
 var mat_3b
 var mat_4b
@@ -241,7 +259,7 @@ function setup(){
 		document.getElementById('teammate_connected_status_div').innerHTML = "Teammate Connected: <div class='alert alert-success' role='alert'>Yes</div>"
 		for (var r = 0; r < 17; r++) {
 			for (var c = 0; c < 17; c++) {
-				//if item goes here, set item loc in item dict, 
+				//if item goes here, set item loc in item dict,
 				if(wall_matrix[r][c] != 0 && wall_matrix[r][c] != 1) {
 					item_name =  wall_matrix[r][c]
 					eval(item_name+"['on_board']=true");
@@ -294,7 +312,6 @@ function changeGameID(){
 	}
 	socket.emit('joinGame', data);
 }
-	
 
 function teammateJoined(data){
 	console.log("running teammate joined")
@@ -331,7 +348,7 @@ function draw(){
 			}
 		}
 	}
-	
+
 	image(player_img, x, y, 60, 60);
 }
 
