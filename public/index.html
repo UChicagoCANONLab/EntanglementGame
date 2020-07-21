@@ -23,7 +23,7 @@
     <div class="row">
 
       <div class="col-3" id="card_container">
-        <div class="card" style="width: 18rem;">
+        <div id="infocard" class="card" style="width: 18rem;">
           <!--<img src="..." class="card-img-top" alt="...">-->
           <div class="card-body">
             <h5 class="card-title" id="">Game Information</h5>
@@ -42,20 +42,20 @@
         </div>
         <span class="br"></span>
         <div class="card" style="width: 18rem;">
-          <img id='item_img_tag' class="card-img-top">
-          <div class="card-body">
-            <h5 id='item_name_tag' class="card-title"></h5>
-            <p id='item_descrip' class="card-text"></p>
-          </div>
-        </div>
-        <span class="br"></span>
-        <div class="card" style="width: 18rem;">
           <div class="card-body">
             <div id="waitingalert" class="alert alert-warning" role="alert">
               Waiting for both teammates to join
             </div>
             <h5 id="counter" style="display: none;" class="card-title">[Timer]</h5>
             <p class="card-text">Collect as many items as you can before the oxygen tank gets low!</p>
+          </div>
+        </div>
+        <span class="br"></span>
+        <div id="itemcard" class="card" style="width: 18rem; display: none;">
+          <img id='item_img_tag' class="card-img-top">
+          <div class="card-body">
+            <h5 id='item_name_tag' class="card-title"></h5>
+            <p id='item_descrip' class="card-text"></p>
           </div>
         </div>
       </div>

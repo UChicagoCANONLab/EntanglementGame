@@ -370,7 +370,9 @@ function startTimer() {
 	num_players_ready += 1;
 	if (num_players_ready == 2){
 		allow_movement = true;
-		document.getElementById('waitingalert').style.displau = "none";
+		document.getElementById('waitingalert').style.display = "none";
+		document.getElementById('infocard').style.display = "none";
+		document.getElementById('itemcard').style.display = "block";
 		document.getElementById('counter').style.display = "block";
 		countdown(2);
 		nextItem();
