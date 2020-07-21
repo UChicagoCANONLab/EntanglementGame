@@ -27,6 +27,8 @@ var walkie_talkie_img
 var water_img
 var wrench_img
 
+var num_players_ready = 0;
+
 var mat_1a = [
 				[0,0,0,0,0,0,0,0,0,1,0,0,'first_aid',1,0,0,0], // row 1
 				[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], // wall
@@ -292,6 +294,8 @@ function setup(){
 
 	if (teammate_connected) {
 		document.getElementById('teammate_connected_status_div').innerHTML = "Teammate Connected: <div class='alert alert-success' role='alert'>Yes</div>"
+		document.getElementById('waitingalert').className = "alert alert-success";
+		document.getElementById('waitingalert').innerHTML = "Waiting for both teammates to hit 'OK'";
 		for (var r = 0; r < 17; r++) {
 			for (var c = 0; c < 17; c++) {
 				//if item goes here, set item loc in item dict,
@@ -315,6 +319,7 @@ function setup(){
 	socket.on('chat', handleChat)
 	socket.on('teammateJoined', teammateJoined)
 	socket.on('joinResult', handleResult);
+	socket.on('startTimerMsg', startTimer)
 
 	noLoop();
 
@@ -327,6 +332,7 @@ function handleResult(result) {
 		player_num = result.player_num;
 		document.getElementById('gamecodediv').innerHTML = "Game Code: <div class='alert alert-warning' role='alert'>"+gameID+"</div>";
 		socket.emit('p2joined',{gameID:gameID});
+		teammateJoined();
 	}
 	else if (result.status == 'created') {
 		alert("Succesfully created new game.");
@@ -348,19 +354,23 @@ function changeGameID(){
 }
 
 function teammateJoined(data){
-	// var data = {
-	// 	x: 12,
-	// 	y: 12,
-	// 	x_mat: 0,
-	// 	y_mat: 0,
-	// 	gameID: gameID
-	// }
+	console.log('alljoined')
+	alert("Both players have joined! [story story story]. Once both players have pressed 'OK,' the timer will start and you can press any key to show the board!");
 	teammate_connected = true;
 	setup();
 	redraw();
-	//socket.emit('position', data)
+	socket.emit('startTimer', {gameID: gameID});
+}
 
-
+function startTimer() {
+	num_players_ready += 1;
+	if (num_players_ready == 2){
+		allow_movement = true;
+		console.log('starting timer');
+	}
+	else {
+		console.log('waiting for other player');
+	}
 }
 
 function draw(){
