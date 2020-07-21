@@ -373,8 +373,9 @@ function startTimer() {
 		document.getElementById('waitingalert').style.display = "none";
 		document.getElementById('infocard').style.display = "none";
 		document.getElementById('itemcard').style.display = "block";
+		document.getElementById('skipcard').style.display = "block";
 		document.getElementById('counter').style.display = "block";
-		countdown(5);
+		countdown(8);
 		nextItem(itemIDX);
 	}
 	else {
