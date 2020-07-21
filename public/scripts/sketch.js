@@ -303,6 +303,7 @@ function teammateJoined(data){
 	x_mat = 0;
 	y_mat = 0;
 	teammate_connected = true;
+	setup()
 }
 
 function draw(){
