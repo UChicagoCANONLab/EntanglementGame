@@ -206,8 +206,6 @@ function setup(){
     var game_canvas = createCanvas(648,648);
 	game_canvas.parent("game_stage");
 
-	console.log(player_num)
-
 	if (level_num == 1) {
 		if (player_num == 1) {
 			maze_img = loadImage('../res/Maze_1A.png');
@@ -314,18 +312,18 @@ function changeGameID(){
 }
 
 function teammateJoined(data){
-	console.log("running teammate joined")
-	var data = {
-		x: 12,
-		y: 12,
-		x_mat: 0,
-		y_mat: 0,
-		gameID: gameID 
-	}
+	// var data = {
+	// 	x: 12,
+	// 	y: 12,
+	// 	x_mat: 0,
+	// 	y_mat: 0,
+	// 	gameID: gameID 
+	// }
+	teammate_connected = true;
 	setup();
 	redraw();
 	//socket.emit('position', data)
-	teammate_connected = true;
+	
 	
 }
 
