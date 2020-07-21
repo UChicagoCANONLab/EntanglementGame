@@ -397,3 +397,20 @@ function adjustPos(data){
 	x = data.x;
 	y = data.y;
 }
+
+function nextItem() {
+	const random_item = items[Math.floor(Math.random() * items.length)];
+	if (random_item['on_board'] == true) {
+		document.getElementById('item_name_tag').innerHTML = random_item['name'];
+		document.getElementById('item_img_tag').src = random_item['img_path'];
+		document.getElementById('item_descrip').innerHTML = "Work with your teammate to get this item as fast as possible!";
+	}
+	else {
+		document.getElementById('item_name_tag').innerHTML = random_item['name'];
+		document.getElementById('item_img_tag').src = random_item['img_path'];
+		document.getElementById('item_descrip').innerHTML = "The item is on your teammate's board! Follow their lead!";
+	}
+	rand_item_name = random_item['name'];
+	rand_item_pic_path = random_item['img_path'];
+	// if on this board display item, if on other board, say "The item is your teammate's board! Follow their lead!"
+}
