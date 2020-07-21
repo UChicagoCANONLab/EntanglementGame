@@ -366,6 +366,20 @@ function teammateJoined(data){
 	gameItems = data.gameItems;
 	x = data.x;
 	y = data.y;
+
+	if (x==12) {
+		x_mat = 0;
+	}
+	else if(x==588) {
+		x_mat = 16;
+	}
+	if (y==12) {
+		y_mat = 0;
+	}
+	else if(y==588) {
+		y_mat = 16;
+	}
+	
 	setup();
 	redraw();
 	socket.emit('startTimer', {gameID: gameID});
