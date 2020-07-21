@@ -325,7 +325,6 @@ function handleResult(result) {
 		gameID = result.gameID;
 		player_num = result.player_num;
 		document.getElementById('gamecodediv').innerHTML = "Game Code: <div class='alert alert-warning' role='alert'>"+gameID+"</div>";
-		teammateJoined();
 		socket.emit('p2joined',{gameID:gameID});
 	}
 	else if (result.status == 'created') {
