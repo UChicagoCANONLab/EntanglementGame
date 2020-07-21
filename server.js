@@ -19,35 +19,39 @@ function newConnection(socket){
 	socket.on('chat', chatMsg)
 
  /// ---------------------START ROOM ADDITIONS ------------------------------
- // socket.on('createNewGame', createNewGame)
- //
- // function makeRoom(){
-	//  // create a unique Socket.IO Room ID
-	// var thisGameID = Math.floor((Math.random()*10000) + 1);
-	// // while (gameRooms.includes(thisGameID)){
-	// // 	thisGameID = Math.floor((Math.random()*1000) + 1);
-	// // }
-	// gameRooms.push(thisGameID);
-	// //Return the gameID and the SocketID to browers clientGameID
-	// socket.emit('newGameCreated', {gameID: thisGameID})
- //
-	// //Join the Room
-	// socket.join(gameID.toString());
- // }
- //
- // socket.on('joinGame', joinGame);
- //
- // function joinGame(data){
- //
-	//  var room = socket.manager.rooms["/" + data.gameID];
- //
-	//  if (room != undefined) {
-	// 	 socket.join(data.gameID)
-	// 	 io.sockets.in(data.gameID).emit('joined', 'new_p');
-	//  } else {
-	// 	 socket.emit('error', {message: "This Game does not exist."})
-	//  }
- // }
+
+	socket.on('joinGame', joinGame);
+
+	socket.on('p2joined', tellJoined);
+
+	function tellJoined(data) {
+		socket.to(data.gameID).emit('teammateJoined');
+	}
+
+	function joinGame(data){
+		
+		result = {
+			status: null,
+			gameID: data.gameID,
+			player_num: null
+		};
+
+
+		if (io.nsps['/'].adapter.rooms[data.gameID] != undefined && io.nsps['/'].adapter.rooms[data.gameID].length < 2) {
+			socket.join(data.gameID);
+			result.status = "success";
+			result.player_num = 2;
+		}
+		else if (io.nsps['/'].adapter.rooms[data.gameID] == undefined) {
+			socket.join(data.gameID);
+			result.status = "created";
+			result.player_num = 1;
+		}
+		else {
+			result.status = "full"
+		}
+		socket.emit('joinResult', result);
+	}
 
 	/// ---------------------END ROOM ADDITIONS ------------------------------
 
