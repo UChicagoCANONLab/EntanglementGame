@@ -1,5 +1,5 @@
 var socket;
-
+var corners = [12, 588];
 var x = 12;
 var y = 12;
 var x_mat = 0;
@@ -338,7 +338,9 @@ function handleResult(result) {
 		gameID = result.gameID;
 		player_num = result.player_num;
 		document.getElementById('gamecodediv').innerHTML = "Game Code: <div class='alert alert-warning' role='alert'>"+gameID+"</div>";
-		data = {gameID:gameID, gameItems: shuffle(items)};
+    const start_x = corners[Math.floor(Math.random() * 2)];
+		const start_y = corners[Math.floor(Math.random() * 2)];
+		data = {gameID:gameID, gameItems: shuffle(items), x: start_x, y: start_y};
 		socket.emit('p2joined', data);
 		teammateJoined(data);
 	}
@@ -364,7 +366,9 @@ function changeGameID(){
 function teammateJoined(data){
 	alert("Both players have joined! [story story story]. Once both players have pressed 'OK,' the timer will start and you can press any key to show the board!");
 	teammate_connected = true;
-	gameItems = data.gameItems
+	gameItems = data.gameItems;
+	x = data.x;
+	y = data.y;
 	setup();
 	redraw();
 	socket.emit('startTimer', {gameID: gameID});
