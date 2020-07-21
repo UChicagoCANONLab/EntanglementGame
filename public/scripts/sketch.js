@@ -9,6 +9,7 @@ var level_num = 1; //when timer runs out, level alert in status card changes to 
 var teammate_connected = false;
 var player_num;
 var gameID = "";
+var allow_movement = false;
 
 var player_img
 var maze_img
@@ -386,7 +387,7 @@ function draw(){
 }
 
 function keyPressed() {
-	if (teammate_connected) {
+	if (allow_movement == true) {
 		if (keyCode === UP_ARROW) {
 			if ((!(y - 72 < 0))&&(wall_matrix[y_mat-1][x_mat] != 1)) {
 				y = y - 72;
