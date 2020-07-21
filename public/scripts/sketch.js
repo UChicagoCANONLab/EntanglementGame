@@ -288,10 +288,6 @@ function setup(){
 		}
 	}
 
-	// these hard sets are just for testing
-	// maze_img = loadImage('../res/Maze_1A.png');
-	// wall_matrix = mat_1a
-
 	background(maze_img);
 
 	if (teammate_connected) {
