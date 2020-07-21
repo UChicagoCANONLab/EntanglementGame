@@ -327,9 +327,9 @@ function handleResult(result) {
 		gameID = result.gameID;
 		player_num = result.player_num;
 		document.getElementById('gamecodediv').innerHTML = "Game Code: <div class='alert alert-warning' role='alert'>"+gameID+"</div>";
-		teammateJoined();
-		gameItems = shuffle(items);
-		socket.emit('p2joined',{gameID:gameID, gameItems: gameItems});
+		data = {gameID:gameID, gameItems: shuffle(items)}
+		teammateJoined(data);
+		socket.emit('p2joined', data);
 	}
 	else if (result.status == 'created') {
 		alert("Succesfully created new game.");
@@ -351,27 +351,21 @@ function changeGameID(){
 }
 
 function teammateJoined(data){
-	// var data = {
-	// 	x: 12,
-	// 	y: 12,
-	// 	x_mat: 0,
-	// 	y_mat: 0,
-	// 	gameID: gameID
-	// }
 	teammate_connected = true;
 	gameItems = data.gameItems
 	nextItem();
 	setup();
 	redraw();
-	//socket.emit('position', data)
-
-
 }
 
 function draw(){
 	background(maze_img);
-
-	if (wall_matrix[y_mat][x_mat] == gameItems[itemIDX]) {
+	if(gameItems != null){
+		console.log(gameItems)
+		console.log(`${wall_matrix[y_mat][x_mat]} vs ${gameItems[itemIDX].img_name.substring(0, gameItems[itemIDX].img_name.length -4)}`);
+	}
+	if (wall_matrix[y_mat][x_mat] == gameItems[itemIDX].img_name.substring(0, gameItems[itemIDX].img_name.length -4)) {
+		console.log("we in")
 		eval(wall_matrix[y_mat][x_mat]+"['collected']=true");
 		itemIDX += 1;
 		if(itemIDX < gameItems.length){
