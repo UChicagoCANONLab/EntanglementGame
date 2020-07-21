@@ -30,6 +30,8 @@ function newConnection(socket){
 
 	socket.on('endGame', sendGameOver);
 
+	socket.on('levelChange', sendLevel)
+
 
 	function sendTimer(data){
 		socket.to(data.gameID).emit('startTimerMsg');
@@ -45,6 +47,10 @@ function newConnection(socket){
 
 	function sendGameOver(data){
 		socket.to(data.gameID).emit('gameOver', data.complete)
+	}
+
+	function sendLevel(data) {
+		socket.to(data.gameID).emit('newLevel', data)
 	}
 
 	function joinGame(data){
