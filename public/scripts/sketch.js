@@ -181,6 +181,7 @@ function preload() {
 }
 
 function setup(){
+	console.log("setting up")
 
 	var canvasDiv = document.getElementById('game_stage');
     var width = canvasDiv.offsetWidth;

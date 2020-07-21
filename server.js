@@ -56,7 +56,7 @@ function newConnection(socket){
 	}
 
 	function chatMsg(data){
-		socket.broadcast.emit('chat', data)
+		io.to(data.gameID).emit('chat', data)
 	}
 
 }
