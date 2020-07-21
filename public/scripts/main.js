@@ -1,5 +1,4 @@
 var socket
-var player_num = 1
 
 function updateScroll(){
     var element = document.getElementById("chatbox_container_inner");
