@@ -42,16 +42,19 @@
         </div>
         <span class="br"></span>
         <div class="card" style="width: 18rem;">
-          <img id='item_img_tag' src="" class="card-img-top" alt="...">
+          <img id='item_img_tag' class="card-img-top">
           <div class="card-body">
-            <h5 id='item_name_tag' class="card-title">Card title</h5>
-            <p id='item_descrip' class="card-text">fun item description</p>
+            <h5 id='item_name_tag' class="card-title"></h5>
+            <p id='item_descrip' class="card-text"></p>
           </div>
         </div>
         <span class="br"></span>
         <div class="card" style="width: 18rem;">
           <div class="card-body">
-            <h5 class="card-title">[Timer]</h5>
+            <div id="waitingalert" class="alert alert-warning" role="alert">
+              Waiting for both teammates to join
+            </div>
+            <h5 id="timer" style="display: none;" class="card-title">[Timer]</h5>
             <p class="card-text">Collect as many items as you can before the oxygen tank gets low!</p>
           </div>
         </div>

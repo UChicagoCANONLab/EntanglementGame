@@ -24,6 +24,12 @@ function newConnection(socket){
 
 	socket.on('p2joined', tellJoined);
 
+	socket.on('startTimer', sendTimer);
+
+	function sendTimer(data){
+		socket.to(data.gameID).emit('startTimerMsg');
+	}
+
 	function tellJoined(data) {
 		socket.to(data.gameID).emit('teammateJoined', data);
 	}

@@ -9,6 +9,7 @@ var level_num = 1; //when timer runs out, level alert in status card changes to 
 var teammate_connected = false;
 var player_num;
 var gameID = "";
+var allow_movement = false;
 var gameItems;
 var itemIDX = 0;
 
@@ -27,6 +28,8 @@ var telescope_img
 var walkie_talkie_img
 var water_img
 var wrench_img
+
+var num_players_ready = 0;
 
 var mat_1a = [
 				[0,0,0,0,0,0,0,0,0,1,0,0,'first_aid',1,0,0,0], // row 1
@@ -293,6 +296,8 @@ function setup(){
 
 	if (teammate_connected) {
 		document.getElementById('teammate_connected_status_div').innerHTML = "Teammate Connected: <div class='alert alert-success' role='alert'>Yes</div>"
+		document.getElementById('waitingalert').className = "alert alert-success";
+		document.getElementById('waitingalert').innerHTML = "Waiting for both teammates to hit 'OK'";
 		for (var r = 0; r < 17; r++) {
 			for (var c = 0; c < 17; c++) {
 				//if item goes here, set item loc in item dict,
@@ -310,12 +315,14 @@ function setup(){
 
 	document.getElementById('level_num_div').innerHTML = "Level: <div class='alert alert-info' role='alert'>"+level_num+"</div>"
 
+
 	// socket = io.connect('https://entanglement-game.herokuapp.com/');
 	socket = io.connect('localhost:3000');
 	socket.on('position', adjustPos)
 	socket.on('chat', handleChat)
 	socket.on('teammateJoined', teammateJoined)
 	socket.on('joinResult', handleResult);
+	socket.on('startTimerMsg', startTimer)
 
 	noLoop();
 
@@ -351,28 +358,41 @@ function changeGameID(){
 }
 
 function teammateJoined(data){
+	console.log('alljoined')
+	alert("Both players have joined! [story story story]. Once both players have pressed 'OK,' the timer will start and you can press any key to show the board!");
 	teammate_connected = true;
 	gameItems = data.gameItems
-	nextItem();
 	setup();
 	redraw();
+	socket.emit('startTimer', {gameID: gameID});
+}
+
+function startTimer() {
+	num_players_ready += 1;
+	if (num_players_ready == 2){
+		allow_movement = true;
+		console.log('starting timer');
+		nextItem();
+	}
+	else {
+		console.log('waiting for other player');
+	}
 }
 
 function draw(){
 	background(maze_img);
-	if(gameItems != null){
-		console.log(gameItems)
-		console.log(`${wall_matrix[y_mat][x_mat]} vs ${gameItems[itemIDX].img_name.substring(0, gameItems[itemIDX].img_name.length -4)}`);
-	}
-	if (wall_matrix[y_mat][x_mat] == gameItems[itemIDX].img_name.substring(0, gameItems[itemIDX].img_name.length -4)) {
-		console.log("we in")
-		eval(wall_matrix[y_mat][x_mat]+"['collected']=true");
-		itemIDX += 1;
-		if(itemIDX < gameItems.length){
-			nextItem();
-		} else {
-			//CHANGE THIS TO SOMETHING ELSE
-			alert("collected all the items!")
+	if(gameItems != null ){
+		var curr_item = gameItems[itemIDX].img_name
+		curr_item = curr_item.substring(0, curr_item.length-4)
+
+		if (wall_matrix[y_mat][x_mat] == curr_item) {
+			eval(wall_matrix[y_mat][x_mat]+"['collected']=true");
+			itemIDX += 1;
+			if(itemIDX < gameItems.length){
+				nextItem();
+			} else {
+				alert("collected all the items!")
+			}
 		}
 	}
 
@@ -393,7 +413,7 @@ function draw(){
 }
 
 function keyPressed() {
-	if (teammate_connected) {
+	if (allow_movement == true) {
 		if (keyCode === UP_ARROW) {
 			if ((!(y - 72 < 0))&&(wall_matrix[y_mat-1][x_mat] != 1)) {
 				y = y - 72;
