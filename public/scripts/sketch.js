@@ -322,7 +322,9 @@ function setup(){
 	socket.on('chat', handleChat)
 	socket.on('teammateJoined', teammateJoined)
 	socket.on('joinResult', handleResult);
-	socket.on('startTimerMsg', startTimer)
+	socket.on('startTimerMsg', startTimer);
+	socket.on('itemCollected', nextItem)
+
 
 	noLoop();
 
@@ -375,7 +377,7 @@ function startTimer() {
 		document.getElementById('itemcard').style.display = "block";
 		document.getElementById('counter').style.display = "block";
 		countdown(2);
-		nextItem();
+		nextItem(itemIDX);
 	}
 	else {
 	}
@@ -391,7 +393,8 @@ function draw(){
 			eval(wall_matrix[y_mat][x_mat]+"['collected']=true");
 			itemIDX += 1;
 			if(itemIDX < gameItems.length){
-				nextItem();
+				nextItem(itemIDX);
+				socket.emit('nextItem', {gameID: gameID, index: itemIDX});
 			} else {
 				alert("collected all the items!")
 			}
@@ -487,7 +490,8 @@ function adjustPos(data){
 	redraw()
 }
 
-function nextItem() {
+function nextItem(idx) {
+	itemIDX = idx;
 	const current_item = gameItems[itemIDX];
 	document.getElementById('item_name_tag').innerHTML = current_item['name'];
 	document.getElementById('item_img_tag').src = current_item['img_path'];
@@ -511,7 +515,7 @@ function countdown(minutes) {
             setTimeout(tick, 1000);
         } else {
             if(mins > 1){
-                countdown(mins-1);           
+                countdown(mins-1);
             }
         }
     }

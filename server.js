@@ -26,12 +26,18 @@ function newConnection(socket){
 
 	socket.on('startTimer', sendTimer);
 
+	socket.on('nextItem', tellCollected)
+
 	function sendTimer(data){
 		socket.to(data.gameID).emit('startTimerMsg');
 	}
 
 	function tellJoined(data) {
 		socket.to(data.gameID).emit('teammateJoined', data);
+	}
+
+	function tellCollected(data) {
+		socket.to(data.gameID).emit('itemCollected', data.index);
 	}
 
 	function joinGame(data){
