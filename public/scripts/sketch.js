@@ -334,9 +334,9 @@ function handleResult(result) {
 		gameID = result.gameID;
 		player_num = result.player_num;
 		document.getElementById('gamecodediv').innerHTML = "Game Code: <div class='alert alert-warning' role='alert'>"+gameID+"</div>";
-		teammateJoined();
-		gameItems = shuffle(items);
-		socket.emit('p2joined',{gameID:gameID, gameItems: gameItems});
+		data = {gameID:gameID, gameItems: shuffle(items)}
+		teammateJoined(data);
+		socket.emit('p2joined', data);
 	}
 	else if (result.status == 'created') {
 		alert("Succesfully created new game.");
@@ -362,7 +362,6 @@ function teammateJoined(data){
 	alert("Both players have joined! [story story story]. Once both players have pressed 'OK,' the timer will start and you can press any key to show the board!");
 	teammate_connected = true;
 	gameItems = data.gameItems
-	nextItem();
 	setup();
 	redraw();
 	socket.emit('startTimer', {gameID: gameID});
@@ -373,6 +372,7 @@ function startTimer() {
 	if (num_players_ready == 2){
 		allow_movement = true;
 		console.log('starting timer');
+		nextItem();
 	}
 	else {
 		console.log('waiting for other player');
@@ -381,15 +381,18 @@ function startTimer() {
 
 function draw(){
 	background(maze_img);
+	if(gameItems != null ){
+		var curr_item = gameItems[itemIDX].img_name
+		curr_item = curr_item.substring(0, curr_item.length-4)
 
-	if (wall_matrix[y_mat][x_mat] == gameItems[itemIDX]) {
-		eval(wall_matrix[y_mat][x_mat]+"['collected']=true");
-		itemIDX += 1;
-		if(itemIDX < gameItems.length){
-			nextItem();
-		} else {
-			//CHANGE THIS TO SOMETHING ELSE
-			alert("collected all the items!")
+		if (wall_matrix[y_mat][x_mat] == curr_item) {
+			eval(wall_matrix[y_mat][x_mat]+"['collected']=true");
+			itemIDX += 1;
+			if(itemIDX < gameItems.length){
+				nextItem();
+			} else {
+				alert("collected all the items!")
+			}
 		}
 	}
 
