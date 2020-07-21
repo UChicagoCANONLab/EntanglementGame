@@ -368,7 +368,6 @@ function teammateJoined(data){
 
 function startTimer() {
 	num_players_ready += 1;
-	console.log(num_players_ready)
 	if (num_players_ready == 2){
 		allow_movement = true;
 		document.getElementById('waitingalert').style.display = "none";
