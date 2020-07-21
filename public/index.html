@@ -26,12 +26,12 @@
         <div class="card" style="width: 18rem;">
           <!--<img src="..." class="card-img-top" alt="...">-->
           <div class="card-body">
-            <h5 class="card-title" id="clientGameID">Game Information</h5>
-            <div>
+            <h5 class="card-title" id="">Game Information</h5>
+            <div id="gamecodediv">
               <label for="newGameID"> Game Code:</label>
                <input type="text" id="newGameID" name="newGameID" class="form-control" placeholder="Game ID" aria-describedby="basic-addon1">
               <span class="br"></span>
-              <button onclick="changeGameID" id="newGameIDBttn" type="button" class="btn btn-info">Join or Create Game</button>
+              <button id="newGameIDBttn" type="button" class="btn btn-info" onclick="changeGameID()">Join or Create Game</button>
             </div>
             <span class="br"></span>
             <div id="teammate_connected_status_div">
