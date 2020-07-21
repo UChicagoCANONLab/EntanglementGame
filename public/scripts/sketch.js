@@ -6,8 +6,9 @@ var x_mat = 0;
 var y_mat = 0;
 
 var level_num = 1; //when timer runs out, level alert in status card changes to "Continue to Level X+1" button
-var teammate_connected = true;
-var game_code = "";
+var teammate_connected = false;
+var player_num;
+var gameID = "";
 
 var player_img
 var maze_img
@@ -188,7 +189,7 @@ function setup(){
 	game_canvas.parent("game_stage");
 
 	if (level_num == 1) {
-		if (teammate_connected == false) {
+		if (player_num == 1) {
 			maze_img = loadImage('../res/Maze_1A.png');
 			wall_matrix = mat_1a
 		}
@@ -198,7 +199,7 @@ function setup(){
 		}
 	}
 	if (level_num == 2) {
-		if (teammate_connected == false) {
+		if (player_num == 1) {
 			maze_img = loadImage('../res/Maze_2A.png');
 			wall_matrix = mat_2a
 		}
@@ -208,7 +209,7 @@ function setup(){
 		}
 	}
 	if (level_num == 3) {
-		if (teammate_connected == false) {
+		if (player_num == 1) {
 			maze_img = loadImage('../res/Maze_3A.png');
 			wall_matrix = mat_3a
 		}
@@ -218,7 +219,7 @@ function setup(){
 		}
 	}
 	if (level_num == 4) {
-		if (teammate_connected == false) {
+		if (player_num == 1) {
 			maze_img = loadImage('../res/Maze_4A.png');
 			wall_matrix = mat_4a
 		}
@@ -257,7 +258,7 @@ function setup(){
 	socket = io.connect('localhost:3000');
 	socket.on('position', adjustPos)
 	socket.on('chat', handleChat)
-	socket.on('joined', teammateJoined)
+	socket.on('teammateJoined', teammateJoined)
 
 	/// ---------------------START ROOM ADDITIONS ------------------------------
 // 	socket.emit('createNewGame');
