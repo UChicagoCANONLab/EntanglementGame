@@ -90,7 +90,7 @@ var flag = {
 };
 var fuel = {
   name: 'Fuel Tank',
-  img_path : '../res/Fuel.png',
+  img_path : '../res/fuel.png',
   img_name : 'fuel_img',
   collected : false,
   location : [0,0],
