@@ -7,38 +7,62 @@ function updateScroll(){
 
 function askUp(){
 	message_text = 'Can you go up?'
-	writeChat(message_text, player_num)
-	socket.emit('chat', message_text);
+	var data = {
+		gameID: gameID,
+		message_text: message_text,
+		player_num: player_num
+	}
+	socket.emit('chat', data);
 }
 
 function askDown(){
 	message_text = 'Can you go down?'
-	writeChat(message_text, player_num)
-	socket.emit('chat', message_text);
+	var data = {
+		gameID: gameID,
+		message_text: message_text,
+		player_num: player_num
+	}
+	socket.emit('chat', data);
 }
 
 function askRight(){
 	message_text = 'Can you go right?'
-	writeChat(message_text, player_num)
-	socket.emit('chat', message_text);
+	var data = {
+		gameID: gameID,
+		message_text: message_text,
+		player_num: player_num
+	}
+	socket.emit('chat', data);
 }
 
 function askLeft(){
 	message_text = 'Can you go left?'
-	writeChat(message_text, player_num)
-	socket.emit('chat', message_text);
+	var data = {
+		gameID: gameID,
+		message_text: message_text,
+		player_num: player_num
+	}
+	socket.emit('chat', data);
 }
 
 function chatYes(){
 	message_text = 'Yes!'
-	writeChat(message_text, player_num)
-	socket.emit('chat', message_text);
+	var data = {
+		gameID: gameID,
+		message_text: message_text,
+		player_num: player_num
+	}
+	socket.emit('chat', data);
 }
 
 function chatNo(){
 	message_text = 'No'
-	writeChat(message_text, player_num)
-	socket.emit('chat', message_text);
+	var data = {
+		gameID: gameID,
+		message_text: message_text,
+		player_num: player_num
+	}
+	socket.emit('chat', data);
 }
 
 function handleChat(data){
