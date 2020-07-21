@@ -316,14 +316,16 @@ function setup(){
 	document.getElementById('level_num_div').innerHTML = "Level: <div class='alert alert-info' role='alert'>"+level_num+"</div>"
 
 
-	socket = io.connect('https://entanglement-game.herokuapp.com/');
-	//socket = io.connect('localhost:3000');
+	// socket = io.connect('https://entanglement-game.herokuapp.com/');
+	socket = io.connect('localhost:3000');
 	socket.on('position', adjustPos)
 	socket.on('chat', handleChat)
 	socket.on('teammateJoined', teammateJoined)
 	socket.on('joinResult', handleResult);
 	socket.on('startTimerMsg', startTimer);
 	socket.on('itemCollected', nextItem)
+	socket.on('gameOver', gameOver)
+
 
 
 	noLoop();
@@ -395,10 +397,9 @@ function draw(){
 			eval(wall_matrix[y_mat][x_mat]+"['collected']=true");
 			itemIDX += 1;
 			if(itemIDX < gameItems.length){
-				nextItem(itemIDX);
 				socket.emit('nextItem', {gameID: gameID, index: itemIDX});
 			} else {
-				alert("collected all the items!")
+				socket.emit('endGame', {gameID: gameID, complete:true})
 			}
 		}
 	}
@@ -515,11 +516,24 @@ function countdown(minutes) {
         counter.innerHTML = current_minutes.toString() + ":" + (seconds < 10 ? "0" : "") + String(seconds);
         if( seconds > 0 ) {
             setTimeout(tick, 1000);
+        } else if (mins > 1){
+					countdown(mins-1);
         } else {
-            if(mins > 1){
-                countdown(mins-1);
-            }
-        }
+					if (allow_movement) socket.emit('endGame', {gameID: gameID, complete:false});
+				}
     }
     tick();
+}
+
+
+function gameOver(complete){
+	allow_movement = false;
+	if(complete){
+		alert("YOU COLLECTED ALL THE ITEMS! Pick which level you want to play next.")
+	} else {
+		alert(`Time ran out but you to collected ${itemIDX +1} items! Pick which level to play next.`)
+	}
+	document.getElementById('infocard').style.display = "block";
+	document.getElementById('itemcard').style.display = "none";
+	document.getElementById('counter').style.display = "none";
 }
