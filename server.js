@@ -26,7 +26,10 @@ function newConnection(socket){
 
 	socket.on('startTimer', sendTimer);
 
-	socket.on('nextItem', tellCollected)
+	socket.on('nextItem', tellCollected);
+
+	socket.on('endGame', sendGameOver);
+
 
 	function sendTimer(data){
 		socket.to(data.gameID).emit('startTimerMsg');
@@ -38,6 +41,10 @@ function newConnection(socket){
 
 	function tellCollected(data) {
 		socket.to(data.gameID).emit('itemCollected', data.index);
+	}
+
+	function sendGameOver(data){
+		socket.to(data.gameID).emit('gameOver', data.complete)
 	}
 
 	function joinGame(data){
