@@ -31,11 +31,11 @@ function newConnection(socket){
 	}
 
 	function tellJoined(data) {
-		socket.to(data.gameID).emit('teammateJoined');
+		socket.to(data.gameID).emit('teammateJoined', data);
 	}
 
 	function joinGame(data){
-		
+
 		result = {
 			status: null,
 			gameID: data.gameID,
