@@ -4,6 +4,7 @@ var x = 12;
 var y = 12;
 var x_mat = 0;
 var y_mat = 0;
+var reset = true;
 
 var level_num = 1; //when timer runs out, level alert in status card changes to "Continue to Level X+1" button
 var teammate_connected = false;
@@ -231,12 +232,14 @@ function preload() {
 	walkie_talkie_img = loadImage(walkie_talkie.img_path);
 	water_img = loadImage(water.img_path);
 	wrench_img = loadImage(wrench.img_path);
-
-	// determine which level is currently being played
-	// load background image of level x's maze
-	// set wall_matrix_a and wall_matrix_b to mat_xa and mat_xb
-	//wall_matrix_a = mat_1a
-
+  maze1A = loadImage('../res/Maze_1A.png');
+	maze1B = loadImage('../res/Maze_1B.png');
+	maze2A = loadImage('../res/Maze_2A.png');
+	maze2B = loadImage('../res/Maze_2B.png');
+	maze3A = loadImage('../res/Maze_3A.png');
+	maze3B = loadImage('../res/Maze_3B.png');
+	// maze4A = loadImage('../res/Maze_4A.png');
+	// maze4A = loadImage('../res/Maze_4B.png');
 }
 
 function setup(){
@@ -249,44 +252,44 @@ function setup(){
 
 	if (level_num == 1) {
 		if (player_num == 1) {
-			maze_img = loadImage('../res/Maze_1A.png');
+			maze_img = maze1A;
 			wall_matrix = mat_1a
 		}
 		else {
-			maze_img = loadImage('../res/Maze_1B.png');
+			maze_img = maze1B;
 			wall_matrix = mat_1b
 		}
 	}
-	if (level_num == 2) {
+	else if (level_num == 2) {
 		if (player_num == 1) {
-			maze_img = loadImage('../res/Maze_2A.png');
+			maze_img = maze2A;
 			wall_matrix = mat_2a
 		}
 		else {
-			maze_img = loadImage('../res/Maze_2B.png');
+			maze_img = maze2B;
 			wall_matrix = mat_2b
 		}
 	}
-	if (level_num == 3) {
+	else if (level_num == 3) {
 		if (player_num == 1) {
-			maze_img = loadImage('../res/Maze_3A.png');
+			maze_img = maze3A
 			wall_matrix = mat_3a
 		}
 		else {
-			maze_img = loadImage('../res/Maze_3B.png');
+			maze_img = maze3B;
 			wall_matrix = mat_3b
 		}
 	}
-	if (level_num == 4) {
-		if (player_num == 1) {
-			maze_img = loadImage('../res/Maze_4A.png');
-			wall_matrix = mat_4a
-		}
-		else {
-			maze_img = loadImage('../res/Maze_4B.png');
-			wall_matrix = mat_4b
-		}
-	}
+	// else if (level_num == 4) {
+	// 	if (player_num == 1) {
+	// 		maze_img = maze4A;
+	// 		wall_matrix = mat_4a
+	// 	}
+	// 	else {
+	// 		maze_img = maze4B;
+	// 		wall_matrix = mat_4b
+	// 	}
+	// }
 
 	background(maze_img);
 
@@ -379,7 +382,7 @@ function teammateJoined(data){
 	else if(y==588) {
 		y_mat = 16;
 	}
-	
+
 	setup();
 	redraw();
 	socket.emit('startTimer', {gameID: gameID});
@@ -562,6 +565,7 @@ function skipLevel() {
 }
 
 function handleLevelChange(data) {
+
 	console.log("we should change levels");
 	console.log(data)
 }
