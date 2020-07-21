@@ -218,7 +218,6 @@ function preload() {
 }
 
 function setup(){
-	console.log("setting up")
 
 	var canvasDiv = document.getElementById('game_stage');
     var width = canvasDiv.offsetWidth;
@@ -268,8 +267,8 @@ function setup(){
 	}
 
 	// these hard sets are just for testing
-	maze_img = loadImage('../res/Maze_1A.png');
-	wall_matrix = mat_1a
+	// maze_img = loadImage('../res/Maze_1A.png');
+	// wall_matrix = mat_1a
 
 	background(maze_img);
 
@@ -299,7 +298,6 @@ function setup(){
 	socket.on('teammateJoined', teammateJoined)
 	socket.on('joinResult', handleResult);
 
-	redraw();
 	noLoop();
 
 }
@@ -331,21 +329,29 @@ function changeGameID(){
 	}
 	socket.emit('joinGame', data);
 }
-/// ---------------------END ROOM ADDITIONS ------------------------------
-
-
 
 function teammateJoined(data){
-	x = 12;
-	y = 12;
-	x_mat = 0;
-	y_mat = 0;
+	// var data = {
+	// 	x: 12,
+	// 	y: 12,
+	// 	x_mat: 0,
+	// 	y_mat: 0,
+	// 	gameID: gameID 
+	// }
 	teammate_connected = true;
-	setup()
+	setup();
+	redraw();
+	//socket.emit('position', data)
+	
+	
 }
 
 function draw(){
 	background(maze_img);
+
+	if (wall_matrix[y_mat][x_mat] != 1 && wall_matrix[y_mat][x_mat] != 0) {
+		eval(wall_matrix[y_mat][x_mat]+"['collected']=true");
+	}
 
 	//go through all items and if not collected, get location from each and draw it there
 	for (const item_num in items) {
@@ -390,11 +396,6 @@ function keyPressed() {
 			}
 		}
 
-		if (wall_matrix[y_mat][x_mat] != 1 && wall_matrix[y_mat][x_mat] != 0) {
-			eval(wall_matrix[y_mat][x_mat]+"['collected']=true");
-		}
-
-
 		//debugging master control keys (allow to pass through walls)
 		if (key == 'w') {
 			if (!(y - 72 < 0)) {
@@ -423,18 +424,22 @@ function keyPressed() {
 
 		var data = {
 			x: x,
-			y: y
+			y: y,
+			x_mat: x_mat,
+			y_mat: y_mat,
+			gameID: gameID 
 		}
 		socket.emit('position', data)
 	}
-
-	redraw()
 
 }
 
 function adjustPos(data){
 	x = data.x;
 	y = data.y;
+	x_mat = data.x_mat;
+	y_mat = data.y_mat;
+	redraw()
 }
 
 function nextItem() {

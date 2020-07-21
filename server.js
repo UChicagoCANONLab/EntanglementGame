@@ -56,7 +56,7 @@ function newConnection(socket){
 	/// ---------------------END ROOM ADDITIONS ------------------------------
 
 	function posMsg(data){
-		socket.broadcast.emit('position', data)
+		io.to(data.gameID).emit('position', data)
 	}
 
 	function chatMsg(data){
