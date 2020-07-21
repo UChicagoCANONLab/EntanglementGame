@@ -259,31 +259,43 @@ function setup(){
 	socket.on('position', adjustPos)
 	socket.on('chat', handleChat)
 	socket.on('teammateJoined', teammateJoined)
-
-	/// ---------------------START ROOM ADDITIONS ------------------------------
-// 	socket.emit('createNewGame');
-// 	socket.on('newGameCreated', (data) => {
-// 		const statusCard = document.getElementById("clientGameID")
-// 		statusCard.innerHTML = `Your GameID = ${data.gameID}`;
-// 	})
-//
-// }
-//
-// function changeGameID(){
-// 	const newGameId = document.getElementById("newGameID").value;
-// 	var data = {
-// 		gameID: newGameID,
-// 	}
-// 	socket.emit('joinGame', data);
-// }
-//
-// 	socket.on('error', (data) => alert(data.message));
-/// ---------------------END ROOM ADDITIONS ------------------------------
+	socket.on('joinResult', handleResult);
 
 	redraw();
 	noLoop();
 
 }
+
+function handleResult(result) {
+	if (result.status == 'success') {
+		alert("Joined game!")
+		gameID = result.gameID;
+		player_num = result.player_num;
+		document.getElementById('gamecodediv').innerHTML = "Game Code: <div class='alert alert-warning' role='alert'>"+gameID+"</div>";
+		teammateJoined();
+		socket.emit('p2joined',{gameID:gameID});
+	}
+	else if (result.status == 'created') {
+		alert("Succesfully created new game.");
+		gameID = result.gameID;
+		player_num = result.player_num;
+		document.getElementById('gamecodediv').innerHTML = "Game Code: <div class='alert alert-warning' role='alert'>"+gameID+"</div>";
+	}
+	else if (result.status == 'full') {
+		alert("This game is full, try another code.")
+	}
+}
+
+function changeGameID(){
+	const newGameId = document.getElementById("newGameID").value;
+	var data = {
+		gameID: newGameId,
+	}
+	socket.emit('joinGame', data);
+}
+/// ---------------------END ROOM ADDITIONS ------------------------------
+
+	
 
 function teammateJoined(data){
 	x = 12;
