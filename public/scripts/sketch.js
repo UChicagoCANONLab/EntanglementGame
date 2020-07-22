@@ -442,7 +442,7 @@ function changeGameID(){
 }
 
 function teammateJoined(data){
-	alert("Both players have joined! Your astronaut friend accidentally opened the hatch and all her tools floated away. She needs your help to get them back! Use your arrow keys to move around. You can’t move your astronaut through a wall on your side of the maze – but your teammate CAN move your astronaut through walls. That’s how you help each other reach a tool!. Once both players have pressed 'OK,' the timer will start and you can press any key to show the board!");
+	alert("Both players have joined! Your astronaut friend accidentally opened the hatch and all her tools floated away. She needs your help to get them back! Use your arrow keys to move around. You can’t move your astronaut through a wall on your side of the maze – but your teammate CAN move your astronaut through walls. That’s how you help each other reach a tool! Once both players have closed this popup, the timer will start and you can press any key to show the board!");
 	teammate_connected = true;
 	gameItems = data.gameItems;
 	x = data.x;
