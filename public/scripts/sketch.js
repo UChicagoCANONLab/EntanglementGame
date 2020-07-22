@@ -309,7 +309,7 @@ function preload() {
 	walkie_talkie_img = loadImage(walkie_talkie.img_path);
 	water_img = loadImage(water.img_path);
 	wrench_img = loadImage(wrench.img_path);
-  maze1A = loadImage('../res/Maze_1A.png');
+  	maze1A = loadImage('../res/Maze_1A.png');
 	maze1B = loadImage('../res/Maze_1B.png');
 	maze2A = loadImage('../res/Maze_2A.png');
 	maze2B = loadImage('../res/Maze_2B.png');
