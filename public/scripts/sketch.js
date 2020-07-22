@@ -633,9 +633,6 @@ function gameOver(complete){
 	} else {
 		alert(`Time ran out but you to collected ${itemIDX} items! Press OK to continue to the next level.`)
 	}
-	document.getElementById('infocard').style.display = "block";
-	document.getElementById('itemcard').style.display = "none";
-	document.getElementById('counter').style.display = "none";
 }
 
 function skipLevel() {
