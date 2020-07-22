@@ -633,9 +633,7 @@ function gameOver(complete){
 	} else {
 		alert(`Time ran out but you to collected ${itemIDX} items! Press OK to continue to the next level.`)
 	}
-	document.getElementById('infocard').style.display = "block";
-	document.getElementById('itemcard').style.display = "none";
-	document.getElementById('counter').style.display = "none";
+	skipLevel()
 }
 
 function skipLevel() {
@@ -659,6 +657,7 @@ function handleLevelChange(data) {
 		x: corners[Math.floor(Math.random() * 2)],
 		y: corners[Math.floor(Math.random() * 2)]
 	}
+	itemIDX = 0;
 	teammateJoined(data);
 
 	setup();
