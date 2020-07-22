@@ -1,5 +1,8 @@
 var socket;
 var corners = [12, 588];
+
+var mat_corners = [0,17]
+
 var x = 12;
 var y = 12;
 var x_mat = 0;
@@ -31,6 +34,8 @@ var water_img
 var wrench_img
 
 var num_players_ready = 0;
+
+var stop_recursion = false;
 
 var mat_1a = [
 				[0,0,0,0,0,0,0,0,0,1,0,0,'first_aid',1,0,0,0], // row 1
@@ -338,7 +343,7 @@ function handleResult(result) {
 		gameID = result.gameID;
 		player_num = result.player_num;
 		document.getElementById('gamecodediv').innerHTML = "Game Code: <div class='alert alert-warning' role='alert'>"+gameID+"</div>";
-    const start_x = corners[Math.floor(Math.random() * 2)];
+    	const start_x = corners[Math.floor(Math.random() * 2)];
 		const start_y = corners[Math.floor(Math.random() * 2)];
 		data = {gameID:gameID, gameItems: shuffle(items), x: start_x, y: start_y};
 		socket.emit('p2joined', data);
@@ -364,7 +369,7 @@ function changeGameID(){
 }
 
 function teammateJoined(data){
-	alert("Both players have joined! [story story story]. Once both players have pressed 'OK,' the timer will start and you can press any key to show the board!");
+	alert("Both players have joined! Your astronaut friend accidentally opened the hatch and all her tools floated away. She needs your help to get them back! Use your arrow keys to move around. You can’t move your astronaut through a wall on your side of the maze – but your teammate CAN move your astronaut through walls. That’s how you help each other reach a tool!. Once both players have pressed 'OK,' the timer will start and you can press any key to show the board!");
 	teammate_connected = true;
 	gameItems = data.gameItems;
 	x = data.x;
@@ -399,6 +404,7 @@ function startTimer() {
 		document.getElementById('counter').style.display = "block";
 		countdown(8);
 		nextItem(itemIDX);
+		num_players_ready = 0;
 	}
 	else {
 	}
@@ -527,6 +533,10 @@ function countdown(minutes) {
     var seconds = 60;
     var mins = minutes
     function tick() {
+    	if (stop_recursion) {
+    		stop_recursion = false;
+    		return;
+    	}
         var counter = document.getElementById("counter");
         var current_minutes = mins-1
         seconds--;
@@ -546,9 +556,9 @@ function countdown(minutes) {
 function gameOver(complete){
 	allow_movement = false;
 	if(complete){
-		alert("YOU COLLECTED ALL THE ITEMS! Pick which level you want to play next.")
+		alert("YOU COLLECTED ALL THE ITEMS! Press OK to continue to the next level.")
 	} else {
-		alert(`Time ran out but you to collected ${itemIDX} items! Pick which level to play next.`)
+		alert(`Time ran out but you to collected ${itemIDX} items! Press OK to continue to the next level.`)
 	}
 	document.getElementById('infocard').style.display = "block";
 	document.getElementById('itemcard').style.display = "none";
@@ -557,15 +567,26 @@ function gameOver(complete){
 
 function skipLevel() {
 	var data = {
-		current_level: level_num,
-		next_level: level_num+1,
+		next_level: (level_num<4 ? level_num+1 : 1),
 		gameID: gameID
 	}
 	socket.emit('levelChange', data);
 }
 
 function handleLevelChange(data) {
+	stop_recursion = true;
+	level_num = data.next_level;
+	for (const item_num in items) {
+		items[item_num]['on_board'] = false;
+		items[item_num]['collected'] = false;
+	}
 
-	console.log("we should change levels");
-	console.log(data)
+	data = {
+		gameItems: gameItems,
+		x: corners[Math.floor(Math.random() * 2)],
+		y: corners[Math.floor(Math.random() * 2)]
+	}
+	teammateJoined(data);
+
+	setup();
 }
