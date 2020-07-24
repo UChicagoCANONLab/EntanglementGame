@@ -393,8 +393,8 @@ function setup(){
 	document.getElementById('level_num_div').innerHTML = "Level: <div class='alert alert-info' role='alert'>"+level_num+"</div>"
 
 
-	socket = io.connect('https://entanglement-game.herokuapp.com/');
-	// socket = io.connect('localhost:3000');
+	// socket = io.connect('https://entanglement-game.herokuapp.com/');
+	socket = io.connect('localhost:3000');
 	socket.on('position', adjustPos)
 	socket.on('chat', handleChat)
 	socket.on('teammateJoined', teammateJoined)
