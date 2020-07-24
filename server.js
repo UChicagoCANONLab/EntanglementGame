@@ -34,6 +34,9 @@ function newConnection(socket){
 
 	socket.on('disconnecting', () => {
 		console.log("socket disconnecting")
+		const rooms = Object.keys(socket.rooms);
+		console.log(rooms);
+		console.log(socket.rooms);
 	})
 
 	socket.on('disconnect', () => {
