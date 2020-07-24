@@ -32,6 +32,14 @@ function newConnection(socket){
 
 	socket.on('levelChange', sendLevel)
 
+	socket.on('disconnecting', () => {
+		console.log("socket disconnecting")
+	})
+
+	socket.on('disconnect', () => {
+		console.log("socket is disconnected")
+	})
+
 
 	function sendTimer(data){
 		socket.to(data.gameID).emit('startTimerMsg');
