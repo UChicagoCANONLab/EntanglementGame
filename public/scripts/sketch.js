@@ -358,16 +358,16 @@ function setup(){
 			wall_matrix = mat_3b
 		}
 	}
-	// else if (level_num == 4) {
-	// 	if (player_num == 1) {
-	// 		maze_img = maze4A;
-	// 		wall_matrix = mat_4a
-	// 	}
-	// 	else {
-	// 		maze_img = maze4B;
-	// 		wall_matrix = mat_4b
-	// 	}
-	// }
+	else if (level_num == 4) {
+		if (player_num == 1) {
+			maze_img = maze4A;
+			wall_matrix = mat_4a
+		}
+		else {
+			maze_img = maze4B;
+			wall_matrix = mat_4b
+		}
+	}
 
 	background(maze_img);
 
