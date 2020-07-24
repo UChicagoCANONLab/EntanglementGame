@@ -316,8 +316,8 @@ function preload() {
 	maze2B = loadImage('../res/Maze_2B.png');
 	maze3A = loadImage('../res/Maze_3A.png');
 	maze3B = loadImage('../res/Maze_3B.png');
-	// maze4A = loadImage('../res/Maze_4A.png');
-	// maze4A = loadImage('../res/Maze_4B.png');
+	maze4A = loadImage('../res/Maze_4A.png');
+	maze4A = loadImage('../res/Maze_4B.png');
 }
 
 function setup(){
