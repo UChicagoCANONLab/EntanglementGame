@@ -12,6 +12,7 @@ socket.on('gameOver', gameOver);
 socket.on('newLevel', handleLevelChange);
 
 function changeGameID(){
+	console.log("changing game ID")
 	const newGameId = document.getElementById("newGameID").value;
 	var data = {
 		gameID: newGameId,
@@ -19,7 +20,9 @@ function changeGameID(){
 	socket.emit('joinGame', data);
 }
 
+
 function handleChat(data){
+	console.log("received chat")
 	if (data.player_num == player_num) {
 		writeChat(data.message_text, 'me')
 	}
@@ -30,6 +33,7 @@ function handleChat(data){
 
 
 function handleTryJoin(result){
+	console.log("handling join game attempt")
 	if (result.status == 'success') {
 		alert("Joined game!")
 		gameID = result.gameID;
@@ -54,6 +58,7 @@ function handleTryJoin(result){
 
 
 function teammateJoined(data){
+	console.log("both teammates have joined")
 	alert("Both players have joined! Your astronaut friend accidentally opened the hatch and all her tools floated away. She needs your help to get them back! Use your arrow keys to move around. You can’t move your astronaut through a wall on your side of the maze – but your teammate CAN move your astronaut through walls. That’s how you help each other reach a tool! Once both players have closed this popup, the timer will start and you can press any key to show the board!");
 	teammate_connected = true;
 	gameItems = data.gameItems;
@@ -80,6 +85,7 @@ function teammateJoined(data){
 
 
 function adjustPos(data){
+	console.log("moving player")
 	x = data.x;
 	y = data.y;
 	x_mat = data.x_mat;
@@ -89,6 +95,7 @@ function adjustPos(data){
 
 
 function skipLevel() {
+	console.log("telling game to skip level")
 	var data = {
 		next_level: (level_num<4 ? level_num+1 : 1),
 		gameID: gameID
@@ -98,6 +105,7 @@ function skipLevel() {
 
 
 function handleLevelChange(data) {
+	console.log("handling level changing")
 	stop_recursion = true;
 	level_num = data.next_level;
 	for (const item_num in items) {

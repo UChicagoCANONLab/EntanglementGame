@@ -404,7 +404,9 @@ function resetBoard() {
 
 
 function startTimer() {
+	console.log("starting timer")
 	num_players_ready += 1;
+	console.log(num_players_ready + " players are ready")
 	if (num_players_ready == 2){
 		allow_movement = true;
 		document.getElementById('waitingalert').style.display = "none";
@@ -412,7 +414,7 @@ function startTimer() {
 		document.getElementById('itemcard').style.display = "block";
 		document.getElementById('skipcard').style.display = "block";
 		document.getElementById('counter').style.display = "block";
-		countdown(8);
+		countdown(5);
 		nextItem(itemIDX);
 		num_players_ready = 0;
 	}
@@ -422,6 +424,7 @@ function startTimer() {
 
 
 function draw(){
+	console.log("redrawing board")
 	background(maze_img);
 	if(gameItems != null ){
 		var curr_item = gameItems[itemIDX].img_name
@@ -456,6 +459,7 @@ function draw(){
 
 
 function keyPressed() {
+	console.log("key has been pressed")
 	if (allow_movement == true) {
 		if (keyCode === UP_ARROW) {
 			if ((!(y - 72 < 0))&&(wall_matrix[y_mat-1][x_mat] != 1)) {
@@ -522,6 +526,7 @@ function keyPressed() {
 
 
 function nextItem(idx) {
+	console.log("changing item")
 	itemIDX = idx;
 	const current_item = gameItems[itemIDX];
 	document.getElementById('item_name_tag').innerHTML = current_item['name'];
@@ -536,6 +541,7 @@ function nextItem(idx) {
 
 
 function countdown(minutes) {
+	console.log("countdown running")
     var seconds = 60;
     var mins = minutes
     function tick() {
@@ -560,6 +566,7 @@ function countdown(minutes) {
 
 
 function gameOver(complete){
+	console.log("game over")
 	allow_movement = false;
 	if(complete){
 		alert("YOU COLLECTED ALL THE ITEMS! Press OK to continue to the next level.")

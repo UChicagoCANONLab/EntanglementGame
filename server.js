@@ -45,27 +45,32 @@ function newConnection(socket){
 
 
 	function sendTimer(data){
+		console.log("telling clients to start timer")
 		socket.to(data.gameID).emit('startTimerMsg');
 	}
 
 	function tellJoined(data) {
+		console.log("telling clients both players have joined")
 		socket.to(data.gameID).emit('teammateJoined', data);
 	}
 
 	function tellCollected(data) {
+		console.log("telling clients item was collected")
 		socket.to(data.gameID).emit('itemCollected', data.index);
 	}
 
 	function sendGameOver(data){
+		console.log("telling clients game is over")
 		socket.to(data.gameID).emit('gameOver', data.complete)
 	}
 
 	function sendLevel(data) {
+		console.log("telling clients to change levels")
 		socket.to(data.gameID).emit('newLevel', data)
 	}
 
 	function joinGame(data){
-
+		console.log("attempting to connect new client to game")
 		result = {
 			status: null,
 			gameID: data.gameID,
@@ -89,13 +94,13 @@ function newConnection(socket){
 		socket.emit('joinResult', result);
 	}
 
-	/// ---------------------END ROOM ADDITIONS ------------------------------
-
 	function posMsg(data){
+		console.log("telling clients new player position")
 		io.to(data.gameID).emit('position', data)
 	}
 
 	function chatMsg(data){
+		console.log("sending chat message to clients")
 		io.to(data.gameID).emit('chat', data)
 	}
 
