@@ -43,7 +43,6 @@ function handleTryJoin(result){
 		const start_y = corners[Math.floor(Math.random() * 2)];
 		data = {gameID:gameID, gameItems: shuffle(items), x: start_x, y: start_y};
 		socket.emit('p2joined', data);
-		setStartingVars(data);
 		// think it would go here:
 		// PLAYER = player_two;
 	}
