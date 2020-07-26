@@ -30,7 +30,9 @@ function newConnection(socket){
 
 	socket.on('endGame', sendGameOver);
 
-	socket.on('levelChange', sendLevel)
+	socket.on('levelChange', sendLevel);
+
+	socket.on('ImReady', tellSomeoneReady);
 
 	socket.on('disconnecting', () => {
 		console.log("socket disconnecting")
@@ -50,8 +52,13 @@ function newConnection(socket){
 	}
 
 	function tellJoined(data) {
-		console.log("telling clients both players have joined")
-		socket.to(data.gameID).emit('teammateJoined', data);
+		console.log("telling all clients that player 2 has joined");
+		io.in(data.gameID).emit('player2joined', data);
+	}
+
+	function tellSomeoneReady(data){
+		console.log("the number of players ready has changed")
+		io.in(data.gameID).emit('aPlayerReady', data);
 	}
 
 	function tellCollected(data) {

@@ -9,7 +9,7 @@ var x_mat = 0;
 var y_mat = 0;
 var reset = true;
 
-var level_num = 1; //when timer runs out, level alert in status card changes to "Continue to Level X+1" button
+var level_num = 1;
 var teammate_connected = false;
 var player_num;
 var PLAYER;
@@ -41,6 +41,15 @@ var maze2A
 var maze2B
 var maze3A
 var maze4A
+var maze4B
+
+var maze1A
+var maze2A
+var maze3A
+var maze4A
+var maze1B
+var maze2B
+var maze3B
 var maze4B
 
 var num_players_ready = 0;
@@ -330,6 +339,7 @@ function preload() {
 	maze4B = loadImage('../res/Maze_4B.png');
 }
 
+
 player_one = {
 	mazeImg: [maze1A, maze2A, maze3A, maze4A],
 	mazeMat: [mat_1a, mat_2a, mat_3a, mat_4a],
@@ -348,14 +358,19 @@ player_two = {
 	}
 }
 
+
+
+
 function setup(){
 
 	var canvasDiv = document.getElementById('game_stage');
-  var width = canvasDiv.offsetWidth;
-  //var game_canvas = createCanvas(width,600);
-  var game_canvas = createCanvas(648,648);
+  	var width = canvasDiv.offsetWidth;
+  	//var game_canvas = createCanvas(width,600);
+  	var game_canvas = createCanvas(648,648);
 	game_canvas.parent("game_stage");
 
+	//set maze_img to story instead once that picture is ready
+	maze_img = maze1A;
 	background(maze_img);
 
 	if (teammate_connected) {
@@ -388,9 +403,37 @@ function resetBoard() {
 
 }
 
+function tryStartLevel() {
+	if(num_players_ready == 2) {
+		console.log("ready to start")
+		num_players_ready = 0;
+	}
+	else{
+		console.log("not yet")
+	}
+}
+
+function setStartingVars(data){
+	gameItems = data.gameItems;
+	x = data.x;
+	y = data.y;
+	if (x==12) {
+		x_mat = 0;
+	}
+	else if(x==588) {
+		x_mat = 16;
+	}
+	if (y==12) {
+		y_mat = 0;
+	}
+	else if(y==588) {
+		y_mat = 16;
+	}
+}
+
 
 function startTimer() {
-	console.log("starting timer")
+	console.log("checking if timer starts now")
 	num_players_ready += 1;
 	console.log(num_players_ready + " players are ready")
 	if (num_players_ready == 2){

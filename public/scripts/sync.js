@@ -2,14 +2,15 @@ var socket;
 
 // socket = io.connect('https://entanglement-game.herokuapp.com/');
 socket = io.connect('localhost:3000');
-socket.on('position', adjustPos)
-socket.on('chat', handleChat)
-socket.on('teammateJoined', teammateJoined)
+socket.on('position', adjustPos);
+socket.on('chat', handleChat);
+socket.on('player2joined', handleP2Joined);
 socket.on('joinResult', handleTryJoin);
 socket.on('startTimerMsg', startTimer);
 socket.on('itemCollected', nextItem);
 socket.on('gameOver', gameOver);
 socket.on('newLevel', handleLevelChange);
+socket.on('aPlayerReady', readyCountChange);
 
 function changeGameID(){
 	console.log("changing game ID")
@@ -35,7 +36,6 @@ function handleChat(data){
 function handleTryJoin(result){
 	console.log("handling join game attempt")
 	if (result.status == 'success') {
-		alert("Joined game!")
 		gameID = result.gameID;
 		player_num = result.player_num;
 		document.getElementById('gamecodediv').innerHTML = "Game Code: <div class='alert alert-warning' role='alert'>"+gameID+"</div>";
@@ -43,12 +43,11 @@ function handleTryJoin(result){
 		const start_y = corners[Math.floor(Math.random() * 2)];
 		data = {gameID:gameID, gameItems: shuffle(items), x: start_x, y: start_y};
 		socket.emit('p2joined', data);
-		teammateJoined(data);
+		setStartingVars(data);
 		// think it would go here:
 		// PLAYER = player_two;
 	}
 	else if (result.status == 'created') {
-		alert("Succesfully created new game.");
 		gameID = result.gameID;
 		player_num = result.player_num;
 		document.getElementById('gamecodediv').innerHTML = "Game Code: <div class='alert alert-warning' role='alert'>"+gameID+"</div>";
@@ -60,32 +59,21 @@ function handleTryJoin(result){
 	}
 }
 
+function handleP2Joined(data) {
+	setStartingVars(data);
+	document.getElementById('waitingalert').setAttribute("class", "");
+	document.getElementById('waitingalert').setAttribute("role", "");
+	document.getElementById('waitingalert').innerHTML = "<button type='button' class='btn btn-warning' id='preset_btn' onclick='ready()'>Ready</button>";
+}
 
-function teammateJoined(data){
-	console.log("both teammates have joined")
-	alert("Both players have joined! Your astronaut friend accidentally opened the hatch and all her tools floated away. She needs your help to get them back! Use your arrow keys to move around. You can’t move your astronaut through a wall on your side of the maze – but your teammate CAN move your astronaut through walls. That’s how you help each other reach a tool! Once both players have closed this popup, the timer will start and you can press any key to show the board!");
-	teammate_connected = true;
-	gameItems = data.gameItems;
-	x = data.x;
-	y = data.y;
+function ready(){
+	document.getElementById('waitingalert').innerHTML = "<div id='waitingalert' class='alert alert-warning' role='alert'>Waiting for teammate to ready</div>";
+	socket.emit('ImReady', {gameID: gameID});
+}
 
-	if (x==12) {
-		x_mat = 0;
-	}
-	else if(x==588) {
-		x_mat = 16;
-	}
-	if (y==12) {
-		y_mat = 0;
-	}
-	else if(y==588) {
-		y_mat = 16;
-	}
-
-	setup();
-
-	redraw();
-	socket.emit('startTimer', {gameID: gameID});
+function readyCountChange(data){
+	num_players_ready += 1;
+	tryStartLevel()
 }
 
 
@@ -124,7 +112,9 @@ function handleLevelChange(data) {
 		y: corners[Math.floor(Math.random() * 2)]
 	}
 	itemIDX = 0;
-	teammateJoined(data);
+
+	//this needs to be fixed, teammateJoined doesn't exist anymore:
+	//teammateJoined(data);
 
 	setup();
 }
