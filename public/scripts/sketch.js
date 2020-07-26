@@ -35,6 +35,13 @@ var telescope_img
 var walkie_talkie_img
 var water_img
 var wrench_img
+var maze1A
+var maze1B
+var maze2A
+var maze2B
+var maze3A
+var maze4A
+var maze4B
 
 var num_players_ready = 0;
 
@@ -313,7 +320,7 @@ function preload() {
 	walkie_talkie_img = loadImage(walkie_talkie.img_path);
 	water_img = loadImage(water.img_path);
 	wrench_img = loadImage(wrench.img_path);
-  	maze1A = loadImage('../res/Maze_1A.png');
+  maze1A = loadImage('../res/Maze_1A.png');
 	maze1B = loadImage('../res/Maze_1B.png');
 	maze2A = loadImage('../res/Maze_2A.png');
 	maze2B = loadImage('../res/Maze_2B.png');
@@ -321,27 +328,25 @@ function preload() {
 	maze3B = loadImage('../res/Maze_3B.png');
 	maze4A = loadImage('../res/Maze_4A.png');
 	maze4B = loadImage('../res/Maze_4B.png');
+}
 
-	player_one = {
-		mazeImg: [maze1A, maze2A, maze3A, maze4A],
-		mazeMat: [mat_1a, mat_2a, mat_3a, mat_4a],
-		updateScreen : (level_num) => {
-			maze_img = this.mazeImg[level_num - 1];
-			wall_matrix = this.mazeMat[level_num - 1];
-		}
-	}
-
-	player_two = {
-		mazeImg: [maze1B, maze2B, maze3B, maze4B],
-		mazeMat: [mat_1b, mat_2b, mat_3b, mat_4b],
-		updateScreen : (level_num) => {
-			maze_img = this.mazeImg[level_num - 1];
-			wall_matrix = this.mazeMat[level_num - 1];
-		}
+player_one = {
+	mazeImg: [maze1A, maze2A, maze3A, maze4A],
+	mazeMat: [mat_1a, mat_2a, mat_3a, mat_4a],
+	updateScreen : (level_num) => {
+		maze_img = this.mazeImg[level_num - 1];
+		wall_matrix = this.mazeMat[level_num - 1];
 	}
 }
 
-
+player_two = {
+	mazeImg: [maze1B, maze2B, maze3B, maze4B],
+	mazeMat: [mat_1b, mat_2b, mat_3b, mat_4b],
+	updateScreen : (level_num) => {
+		maze_img = this.mazeImg[level_num - 1];
+		wall_matrix = this.mazeMat[level_num - 1];
+	}
+}
 
 function setup(){
 
