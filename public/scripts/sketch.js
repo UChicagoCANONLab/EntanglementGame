@@ -18,6 +18,8 @@ var allow_movement = false;
 var gameItems;
 var itemIDX = 0;
 
+var player_one
+var player_two
 var player_img
 var maze_img
 
@@ -318,26 +320,28 @@ function preload() {
 	maze3A = loadImage('../res/Maze_3A.png');
 	maze3B = loadImage('../res/Maze_3B.png');
 	maze4A = loadImage('../res/Maze_4A.png');
-	maze4A = loadImage('../res/Maze_4B.png');
+	maze4B = loadImage('../res/Maze_4B.png');
+
+	// player_one = {
+	// 	mazeImg: [maze1A, maze2A, maze3A, maze4A],
+	// 	mazeMat: [mat_1a, mat_2a, mat_3a, mat_4a],
+	// 	updateScreen : (level_num) => {
+	// 		maze_img = this.mazeImg[level_num - 1];
+	// 		wall_matrix = this.mazeMat[level_num - 1];
+	// 	}
+	// }
+	//
+	// player_two = {
+	// 	mazeImg: [maze1B, maze2B, maze3B, maze4B],
+	// 	mazeMat: [mat_1b, mat_2b, mat_3b, mat_4b],
+	// 	updateScreen : (level_num) => {
+	// 		maze_img = this.mazeImg[level_num - 1];
+	// 		wall_matrix = this.mazeMat[level_num - 1];
+	// 	}
+	// }
 }
 
-// var player_one = {
-// 	mazeImg: [maze1A, maze2A, maze3A, maze4A],
-// 	mazeMat: [mat_1a, mat_2a, mat_3a, mat4a],
-// 	updateScreen : (level_num) {
-// 		maze_img = this.mazeImg[level_num - 1];
-// 		wall_matrix = this.mazeMat[level_num - 1];
-// 	}
-// }
-//
-// var player_two = {
-// 	mazeImg: [maze1B, maze2B, maze3B, maze4B],
-// 	mazeMat: [mat_1b, mat_2b, mat_3b, mat4b],
-// 	updateScreen : (level_num) {
-// 		maze_img = this.mazeImg[level_num - 1];
-// 		wall_matrix = this.mazeMat[level_num - 1];
-// 	}
-// }
+
 
 function setup(){
 
@@ -346,49 +350,6 @@ function setup(){
   //var game_canvas = createCanvas(width,600);
   var game_canvas = createCanvas(648,648);
 	game_canvas.parent("game_stage");
-
-
-
-	if (level_num == 1) {
-		if (player_num == 1) {
-			maze_img = maze1A;
-			wall_matrix = mat_1a
-		}
-		else {
-			maze_img = maze1B;
-			wall_matrix = mat_1b
-		}
-	}
-	else if (level_num == 2) {
-		if (player_num == 1) {
-			maze_img = maze2A;
-			wall_matrix = mat_2a
-		}
-		else {
-			maze_img = maze2B;
-			wall_matrix = mat_2b
-		}
-	}
-	else if (level_num == 3) {
-		if (player_num == 1) {
-			maze_img = maze3A
-			wall_matrix = mat_3a
-		}
-		else {
-			maze_img = maze3B;
-			wall_matrix = mat_3b
-		}
-	}
-	else if (level_num == 4) {
-		if (player_num == 1) {
-			maze_img = maze4A;
-			wall_matrix = mat_4a
-		}
-		else {
-			maze_img = maze4B;
-			wall_matrix = mat_4b
-		}
-	}
 
 	background(maze_img);
 
