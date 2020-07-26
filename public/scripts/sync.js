@@ -45,7 +45,7 @@ function handleTryJoin(result){
 		socket.emit('p2joined', data);
 		teammateJoined(data);
 		// think it would go here:
-		PLAYER = player_two;
+		// PLAYER = player_two;
 	}
 	else if (result.status == 'created') {
 		alert("Succesfully created new game.");
@@ -53,7 +53,7 @@ function handleTryJoin(result){
 		player_num = result.player_num;
 		document.getElementById('gamecodediv').innerHTML = "Game Code: <div class='alert alert-warning' role='alert'>"+gameID+"</div>";
 		//think it would go here:
-		PLAYER = player_one;
+		// PLAYER = player_one;
 	}
 	else if (result.status == 'full') {
 		alert("This game is full, try another code.")
