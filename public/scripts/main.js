@@ -65,17 +65,6 @@ function chatNo(){
 	socket.emit('chat', data);
 }
 
-function handleChat(data){
-	if (data.player_num == player_num) {
-		writeChat(data.message_text, 'me')
-	}
-	else {
-		writeChat(data.message_text, 'teammate')
-	}
-	
-
-}
-
 function writeChat(data, who){
 	if (who == 'me'){
 		document.getElementById("chatbox_container_inner").innerHTML = document.getElementById("chatbox_container_inner").innerHTML+"<div class='alert alert-info' role='alert'><b>Me: </b>" + data + "</div>";
