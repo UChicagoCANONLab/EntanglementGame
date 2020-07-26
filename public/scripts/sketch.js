@@ -377,16 +377,6 @@ function setup(){
 		document.getElementById('teammate_connected_status_div').innerHTML = "Teammate Connected: <div class='alert alert-success' role='alert'>Yes</div>"
 		document.getElementById('waitingalert').className = "alert alert-success";
 		document.getElementById('waitingalert').innerHTML = "Waiting for both teammates to hit 'OK'";
-		for (var r = 0; r < 17; r++) {
-			for (var c = 0; c < 17; c++) {
-				//if item goes here, set item loc in item dict,
-				if(wall_matrix[r][c] != 0 && wall_matrix[r][c] != 1) {
-					item_name =  wall_matrix[r][c]
-					eval(item_name+"['on_board']=true");
-					eval(item_name+"['location']=["+(r/2).toString()+","+(c/2).toString()+"]");
-				}
-			}
-		}
 	}
 	else {
 		document.getElementById('teammate_connected_status_div').innerHTML = "Teammate Connected: <div class='alert alert-warning' role='alert'>Not yet</div>"
@@ -400,7 +390,15 @@ function setup(){
 
 
 function resetBoard() {
-
+	for (var r = 0; r < 17; r++) {
+		for (var c = 0; c < 17; c++) {
+			if(wall_matrix[r][c] != 0 && wall_matrix[r][c] != 1) {
+				item_name =  wall_matrix[r][c]
+				eval(item_name+"['on_board']=true");
+				eval(item_name+"['location']=["+(r/2).toString()+","+(c/2).toString()+"]");
+			}
+		}
+	}
 }
 
 function tryStartLevel() {
