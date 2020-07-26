@@ -364,6 +364,8 @@ function setup(){
   	var game_canvas = createCanvas(648,648);
 	game_canvas.parent("game_stage");
 
+	//set maze_img to story instead once that picture is ready
+	maze_img = maze1A;
 	background(maze_img);
 
 	if (teammate_connected) {
