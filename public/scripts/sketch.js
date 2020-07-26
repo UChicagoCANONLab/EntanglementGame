@@ -324,7 +324,7 @@ function preload() {
 var player_one = {
 	mazeImg: [maze1A, maze2A, maze3A, maze4A],
 	mazeMat: [mat_1a, mat_2a, mat_3a, mat4a],
-	updateScreen : (level_num) {
+	updateScreen : (level_num) => {
 		maze_img = this.mazeImg[level_num - 1];
 		wall_matrix = this.mazeMat[level_num - 1];
 	}
@@ -333,7 +333,7 @@ var player_one = {
 var player_two = {
 	mazeImg: [maze1B, maze2B, maze3B, maze4B],
 	mazeMat: [mat_1b, mat_2b, mat_3b, mat4b],
-	updateScreen : (level_num) {
+	updateScreen : (level_num) => {
 		maze_img = this.mazeImg[level_num - 1];
 		wall_matrix = this.mazeMat[level_num - 1];
 	}
