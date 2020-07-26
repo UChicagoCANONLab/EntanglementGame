@@ -61,14 +61,6 @@ function newConnection(socket){
 		io.in(data.gameID).emit('aPlayerReady', data);
 	}
 
-	/* OLD FUNCTION
-
-	function tellJoined(data) {
-		console.log("telling clients both players have joined")
-		socket.to(data.gameID).emit('teammateJoined', data);
-	}
-	*/
-
 	function tellCollected(data) {
 		console.log("telling clients item was collected")
 		socket.to(data.gameID).emit('itemCollected', data.index);
