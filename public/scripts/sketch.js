@@ -9,7 +9,7 @@ var x_mat = 0;
 var y_mat = 0;
 var reset = true;
 
-var level_num = 1; //when timer runs out, level alert in status card changes to "Continue to Level X+1" button
+var level_num = 1;
 var teammate_connected = false;
 var player_num;
 var PLAYER;
@@ -35,6 +35,15 @@ var telescope_img
 var walkie_talkie_img
 var water_img
 var wrench_img
+
+var maze1A
+var maze2A
+var maze3A
+var maze4A
+var maze1B
+var maze2B
+var maze3B
+var maze4B
 
 var num_players_ready = 0;
 
@@ -322,6 +331,7 @@ function preload() {
 	maze4A = loadImage('../res/Maze_4A.png');
 	maze4B = loadImage('../res/Maze_4B.png');
 
+
 	player_one = {
 		mazeImg: [maze1A, maze2A, maze3A, maze4A],
 		mazeMat: [mat_1a, mat_2a, mat_3a, mat_4a],
@@ -339,7 +349,10 @@ function preload() {
 			wall_matrix = this.mazeMat[level_num - 1];
 		}
 	}
+
+
 }
+
 
 
 
