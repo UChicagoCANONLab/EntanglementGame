@@ -398,6 +398,34 @@ function resetBoard() {
 
 }
 
+function tryStartLevel() {
+	if(num_players_ready == 2) {
+		console.log("ready to start")
+		num_players_ready = 0;
+	}
+	else{
+		console.log("not yet")
+	}
+}
+
+function setStartingVars(data){
+	gameItems = data.gameItems;
+	x = data.x;
+	y = data.y;
+	if (x==12) {
+		x_mat = 0;
+	}
+	else if(x==588) {
+		x_mat = 16;
+	}
+	if (y==12) {
+		y_mat = 0;
+	}
+	else if(y==588) {
+		y_mat = 16;
+	}
+}
+
 
 function startTimer() {
 	console.log("checking if timer starts now")
