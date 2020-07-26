@@ -385,7 +385,7 @@ function resetBoard() {
 
 
 function startTimer() {
-	console.log("starting timer")
+	console.log("checking if timer starts now")
 	num_players_ready += 1;
 	console.log(num_players_ready + " players are ready")
 	if (num_players_ready == 2){
