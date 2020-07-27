@@ -85,15 +85,6 @@ function adjustPos(data){
 }
 
 
-function skipLevel() {
-	console.log("telling game to skip level")
-	var data = {
-		next_level: (LEVEL<4 ? LEVEL+1 : 1),
-		gameID: gameID
-	}
-	socket.emit('levelChange', data);
-}
-
 /// THIS WILL NEED SOME UPDATING
 function handleLevelChange(data) {
 	console.log("handling level changing")
