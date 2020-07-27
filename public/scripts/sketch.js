@@ -8,7 +8,6 @@ var x_mat = 0;
 var y_mat = 0;
 
 var LEVEL = 1;
-var teammate_connected = false;
 var player_num;
 var gameID = "";
 var allow_movement = false;
