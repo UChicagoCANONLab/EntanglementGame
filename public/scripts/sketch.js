@@ -556,7 +556,7 @@ function nextItem(idx) {
 }
 
 
-var myTimerObj = (function(document)) => {
+var myTimerObj = (function(document) {
 	var myTimer;
 	var seconds = 60;
 
