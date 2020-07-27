@@ -1,7 +1,7 @@
 var socket;
 
-socket = io.connect('https://entanglement-game.herokuapp.com/');
-// socket = io.connect('localhost:3000');
+// socket = io.connect('https://entanglement-game.herokuapp.com/');
+socket = io.connect('localhost:3000');
 socket.on('position', adjustPos);
 socket.on('chat', handleChat);
 socket.on('player2joined', handleP2Joined);
@@ -12,7 +12,7 @@ socket.on('levelOver', levelOver);
 socket.on('newLevel', handleLevelChange);
 socket.on('aPlayerReady', readyCountChange);
 socket.on('disconectionDetected', handleDisconnection);
-socket.on('disconnecting', function(){
+socket.on('disconnect', function(){
 	alert("UH-OH there was a disconnection error");
 	document.location.reload(true);
  });
