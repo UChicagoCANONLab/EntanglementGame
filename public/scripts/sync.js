@@ -8,9 +8,11 @@ socket.on('player2joined', handleP2Joined);
 socket.on('joinResult', handleTryJoin);
 socket.on('startTimerMsg', startTimer);
 socket.on('itemCollected', nextItem);
-socket.on('gameOver', gameOver);
+socket.on('levelOver', levelOver);
 socket.on('newLevel', handleLevelChange);
 socket.on('aPlayerReady', readyCountChange);
+socket.on('disconectionDetected', handleDisconnection);
+
 
 function changeGameID(){
 	console.log("changing game ID")
@@ -86,7 +88,7 @@ function adjustPos(data){
 function skipLevel() {
 	console.log("telling game to skip level")
 	var data = {
-		next_level: (level_num<4 ? level_num+1 : 1),
+		next_level: (LEVEL<4 ? LEVEL+1 : 1),
 		gameID: gameID
 	}
 	socket.emit('levelChange', data);
@@ -96,7 +98,7 @@ function skipLevel() {
 function handleLevelChange(data) {
 	console.log("handling level changing")
 	stop_recursion = true;
-	level_num = data.next_level;
+	LEVEL = data.next_level;
 	for (const item_num in items) {
 		items[item_num]['on_board'] = false;
 		items[item_num]['collected'] = false;
@@ -117,4 +119,14 @@ function handleLevelChange(data) {
 	//teammateJoined(data);
 
 	setup();
+}
+
+
+function handleDisconnection(data){
+  alert("UH-OH there was a disconnection error");
+	LEVEL = 1;
+
+	// ideally reset back to home page but idk how to do that atm
+  resetBoard();
+	socket.emit('forceDisconnect', data);
 }

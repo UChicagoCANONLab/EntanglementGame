@@ -28,17 +28,29 @@ function newConnection(socket){
 
 	socket.on('nextItem', tellCollected);
 
-	socket.on('endGame', sendGameOver);
+	socket.on('endLevel', sendLevelOver);
 
 	socket.on('levelChange', sendLevel);
 
 	socket.on('ImReady', tellSomeoneReady);
 
+	socket.on("forceDisconnect", (data) => {
+		console.log("socket force disconnecting")
+		var rooms = Object.keys(socket.rooms);
+    console.log(`before: ${rooms}`);
+		socket.leave(data.gameID);
+		console.log(`after: ${rooms}`);
+	})
+
 	socket.on('disconnecting', () => {
 		console.log("socket disconnecting")
+		const sessionID = socket.id;
 		const rooms = Object.keys(socket.rooms);
-		console.log(rooms);
-		console.log(socket.rooms);
+		if (rooms.length > 1){
+			rooms.forEach((rm) => {
+				if (rm != sessionID) io.in(rm).emit('disconectionDetected', {gameID: rm});
+			});
+		}
 	})
 
 	socket.on('disconnect', () => {
@@ -66,9 +78,9 @@ function newConnection(socket){
 		socket.to(data.gameID).emit('itemCollected', data.index);
 	}
 
-	function sendGameOver(data){
-		console.log("telling clients game is over")
-		socket.to(data.gameID).emit('gameOver', data.complete)
+	function sendLevelOver(data){
+		console.log("telling clients level is over")
+		socket.to(data.gameID).emit('LevelOver', data.complete)
 	}
 
 	function sendLevel(data) {
@@ -85,15 +97,16 @@ function newConnection(socket){
 		};
 
 
-		if (io.nsps['/'].adapter.rooms[data.gameID] != undefined && io.nsps['/'].adapter.rooms[data.gameID].length < 2) {
-			socket.join(data.gameID);
-			result.status = "success";
-			result.player_num = 2;
-		}
-		else if (io.nsps['/'].adapter.rooms[data.gameID] == undefined) {
+		if (io.nsps['/'].adapter.rooms[data.gameID] == undefined) {
+
 			socket.join(data.gameID);
 			result.status = "created";
 			result.player_num = 1;
+		}
+		else if (io.nsps['/'].adapter.rooms[data.gameID].length < 2) {
+			socket.join(data.gameID);
+			result.status = "success";
+			result.player_num = 2;
 		}
 		else {
 			result.status = "full"

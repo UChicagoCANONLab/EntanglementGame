@@ -6,7 +6,6 @@ var x = 12;
 var y = 12;
 var x_mat = 0;
 var y_mat = 0;
-var reset = true;
 
 var LEVEL = 1;
 var teammate_connected = false;
@@ -38,16 +37,8 @@ var maze1B
 var maze2A
 var maze2B
 var maze3A
-var maze4A
-var maze4B
-
-var maze1A
-var maze2A
-var maze3A
-var maze4A
-var maze1B
-var maze2B
 var maze3B
+var maze4A
 var maze4B
 
 var num_players_ready = 0;
@@ -337,24 +328,6 @@ function preload() {
 	maze4B = loadImage('../res/Maze_4B.png');
 }
 
-player_one = {
-	mazeImg: [maze1A, maze2A, maze3A, maze4A],
-	mazeMat: [mat_1a, mat_2a, mat_3a, mat_4a],
-	updateBoard : () => {
-		maze_img = this.mazeImg[LEVEL - 1];
-		wall_matrix = this.mazeMat[LEVEL - 1];
-	}
-}
-
-player_two = {
-	mazeImg: [maze1B, maze2B, maze3B, maze4B],
-	mazeMat: [mat_1b, mat_2b, mat_3b, mat_4b],
-	updateBoard : () => {
-		maze_img = this.mazeImg[LEVEL - 1];
-		wall_matrix = this.mazeMat[LEVEL - 1];
-	}
-}
-
 
 function setup(){
 
@@ -367,16 +340,36 @@ function setup(){
 	maze_img = maze1A;
 	background(maze_img);
 
+	player_one = {
+		mazeImg: [maze1A, maze2A, maze3A, maze4A],
+		mazeMat: [mat_1a, mat_2a, mat_3a, mat_4a],
+	}
+
+	player_two = {
+		mazeImg: [maze1B, maze2B, maze3B, maze4B],
+		mazeMat: [mat_1b, mat_2b, mat_3b, mat_4b],
+	}
+
 	document.getElementById('level_num_div').innerHTML = "Level: <div class='alert alert-info' role='alert'>"+LEVEL+"</div>"
 
 	noLoop();
 }
 
 
+// just remember to set LEVEL accordingly BEFORE calling this function
 function resetBoard() {
-	//Get corresponding Maze Img and Matrix
-	if (player_num == 1) player_one.updateBoard();
-	else player_two.updateBoard();
+	console.log("reseting board");
+	//Get corresponding Maze Img and Matrix (separate to separate function)?
+	if (player_num == 1){
+		maze_img = player_one.mazeImg[LEVEL - 1];
+		wall_matrix = player_one.mazeMat[LEVEL - 1];
+	}
+	else{
+		maze_img = player_one.mazeImg[LEVEL - 1];
+		wall_matrix = player_one.mazeMat[LEVEL - 1];
+	}
+	console.log(wall_matrix);
+	console.log(maze_img);
 
 	//updates items accordingly
 	for (var r = 0; r < 17; r++) {
@@ -393,6 +386,8 @@ function resetBoard() {
 function tryStartLevel() {
 	if(num_players_ready == 2) {
 		console.log("ready to start")
+		resetBoard();
+		redraw();
 		num_players_ready = 0;
 	}
 	else{
@@ -401,7 +396,7 @@ function tryStartLevel() {
 }
 
 function getStartingVars(){
-
+	console.log("getting Starting Vars");
 	x_loc = Math.floor(Math.random() * 2);
 	y_loc = Math.floor(Math.random() *2);
 	const startingVars = {
@@ -416,7 +411,7 @@ function getStartingVars(){
 }
 
 function setStartingVars(data){
-	console.log(data);
+	console.log("setting Starting Vars");
 	x = data.x;
 	y = data.y;
 	x_mat = data.x_mat;
@@ -458,7 +453,7 @@ function draw(){
 			if(itemIDX < gameItems.length){
 				socket.emit('nextItem', {gameID: gameID, index: itemIDX});
 			} else {
-				socket.emit('endGame', {gameID: gameID, complete:true})
+				socket.emit('endLevel', {gameID: gameID, complete:true})
 			}
 		}
 	}
@@ -587,9 +582,12 @@ function countdown(minutes) {
 }
 
 
-function gameOver(complete){
-	console.log("game over")
+function levelOver(complete){
+	console.log("level over")
 	allow_movement = false;
+	if(LEVEL == 4){
+		// actual end of game logic here
+	}
 	if(complete){
 		alert("YOU COLLECTED ALL THE ITEMS! Press OK to continue to the next level.")
 	} else {
