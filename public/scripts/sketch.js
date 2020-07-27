@@ -359,7 +359,6 @@ function setup(){
 
 // just remember to set LEVEL accordingly BEFORE calling this function
 function resetBoard() {
-	console.log("reseting board");
 	//Get corresponding Maze Img and Matrix (separate to separate function)?
 	if (player_num == 1){
 		maze_img = player_one.mazeImg[LEVEL - 1];
@@ -385,19 +384,16 @@ function resetBoard() {
 
 function tryStartLevel() {
 	if(num_players_ready == 2) {
-		console.log("ready to start")
 		resetBoard();
 		redraw();
 		startTimer();
 		num_players_ready = 0;
 	}
 	else{
-		console.log("not yet")
 	}
 }
 
 function getStartingVars(){
-	console.log("getting Starting Vars");
 	x_loc = Math.floor(Math.random() * 2);
 	y_loc = Math.floor(Math.random() *2);
 	const startingVars = {
@@ -412,7 +408,6 @@ function getStartingVars(){
 }
 
 function setStartingVars(data){
-	console.log("setting Starting Vars");
 	x = data.x;
 	y = data.y;
 	x_mat = data.x_mat;
@@ -423,9 +418,7 @@ function setStartingVars(data){
 
 
 function startTimer() {
-	console.log("checking if timer starts now")
 	num_players_ready += 1;
-	console.log(num_players_ready + " players are ready")
 	allow_movement = true;
 	document.getElementById('waitingalert').style.display = "none";
 	document.getElementById('infocard').style.display = "none";
@@ -499,32 +492,6 @@ function keyPressed() {
 			}
 		}
 
-		//debugging master control keys (allow to pass through walls)
-		if (key == 'w') {
-			if (!(y - 72 < 0)) {
-				y = y - 72;
-				y_mat = y_mat - 2;
-			}
-		}
-		else if (key == 's') {
-			if (!(y + 72 >= 648)) {
-				y = y + 72;
-				y_mat = y_mat + 2;
-			}
-		}
-		if (key == 'a') {
-			if (!(x - 72 < 0)) {
-				x = x - 72;
-				x_mat = x_mat - 2;
-			}
-		}
-		else if (key == 'd') {
-			if (!(x + 72 >= 648)) {
-				x = x + 72;
-				x_mat = x_mat + 2;
-			}
-		}
-
 		var data = {
 			x: x,
 			y: y,
@@ -539,7 +506,6 @@ function keyPressed() {
 
 
 function nextItem(idx) {
-	console.log("changing item")
 	itemIDX = idx;
 	const current_item = gameItems[itemIDX];
 	document.getElementById('item_name_tag').innerHTML = current_item['name'];
@@ -584,7 +550,6 @@ var myTimerObj = (function(document) {
 
 
 function levelOver(complete){
-	console.log("level over")
 	if(LEVEL == 4 && complete){
 		// actual end of game logic here
 		alert("Congratulations, you beat the game! You'll be taken back to level 1 after closing this popup. You can refresh to enter a different game.");
@@ -604,7 +569,6 @@ function levelOver(complete){
 }
 
 function skipLevel() {
-	console.log("skipping level");
 	allow_movement = false;
 	socket.emit('skiplevel', getStartingVars());
 }

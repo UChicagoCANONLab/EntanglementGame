@@ -35,7 +35,6 @@ function newConnection(socket){
 	socket.on('skiplevel', sendLevelSkip);
 
 	socket.on('disconnecting', () => {
-		console.log("socket disconnecting")
 		const sessionID = socket.id;
 		const rooms = Object.keys(socket.rooms);
 		if (rooms.length > 1){
@@ -46,37 +45,30 @@ function newConnection(socket){
 	})
 
 	socket.on('disconnect', () => {
-		console.log("socket is disconnected")
 	})
 
 
 	function sendTimer(data){
-		console.log("telling clients to start timer")
 		socket.to(data.gameID).emit('startTimerMsg');
 	}
 
 	function tellJoined(data) {
-		console.log("telling all clients that player 2 has joined");
 		io.in(data.gameID).emit('player2joined', data);
 	}
 
 	function tellSomeoneReady(data){
-		console.log("the number of players ready has changed")
 		io.in(data.gameID).emit('aPlayerReady', data);
 	}
 
 	function tellCollected(data) {
-		console.log("telling clients item was collected")
 		io.in(data.gameID).emit('itemCollected', data.index);
 	}
 
 	function sendLevelOver(data){
-		console.log("telling clients level is over")
 		io.in(data.gameID).emit('LevelOver', data.complete)
 	}
 
 	function joinGame(data){
-		console.log("attempting to connect new client to game")
 		result = {
 			status: null,
 			gameID: data.gameID,
@@ -101,12 +93,10 @@ function newConnection(socket){
 	}
 
 	function posMsg(data){
-		console.log("telling clients new player position")
 		io.to(data.gameID).emit('position', data)
 	}
 
 	function chatMsg(data){
-		console.log("sending chat message to clients")
 		io.to(data.gameID).emit('chat', data)
 	}
 

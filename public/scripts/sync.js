@@ -19,7 +19,6 @@ socket.on('disconnect', function(){
 
 
 function changeGameID(){
-	console.log("changing game ID")
 	const newGameId = document.getElementById("newGameID").value;
 	var data = {
 		gameID: newGameId,
@@ -29,7 +28,6 @@ function changeGameID(){
 
 
 function handleChat(data){
-	console.log("received chat")
 	if (data.player_num == player_num) {
 		writeChat(data.message_text, 'me')
 	}
@@ -40,7 +38,6 @@ function handleChat(data){
 
 
 function handleTryJoin(result){
-	console.log("handling join game attempt")
 	if (result.status == 'success') {
 		gameID = result.gameID;
 		player_num = result.player_num;
@@ -80,7 +77,6 @@ function readyCountChange(data){
 
 
 function adjustPos(data){
-	console.log("moving player")
 	x = data.x;
 	y = data.y;
 	x_mat = data.x_mat;
