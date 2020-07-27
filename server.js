@@ -67,7 +67,7 @@ function newConnection(socket){
 
 	function tellCollected(data) {
 		console.log("telling clients item was collected")
-		socket.to(data.gameID).emit('itemCollected', data.index);
+		io.in(data.gameID).emit('itemCollected', data.index);
 	}
 
 	function sendLevelOver(data){
