@@ -34,14 +34,6 @@ function newConnection(socket){
 
 	socket.on('ImReady', tellSomeoneReady);
 
-	socket.on("forceDisconnect", (data) => {
-		console.log("socket force disconnecting")
-		var rooms = Object.keys(socket.rooms);
-    console.log(`before: ${rooms}`);
-		socket.leave(data.gameID);
-		console.log(`after: ${rooms}`);
-	})
-
 	socket.on('disconnecting', () => {
 		console.log("socket disconnecting")
 		const sessionID = socket.id;
@@ -98,7 +90,6 @@ function newConnection(socket){
 
 
 		if (io.nsps['/'].adapter.rooms[data.gameID] == undefined) {
-
 			socket.join(data.gameID);
 			result.status = "created";
 			result.player_num = 1;
