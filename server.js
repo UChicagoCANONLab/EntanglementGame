@@ -72,7 +72,7 @@ function newConnection(socket){
 
 	function sendLevelOver(data){
 		console.log("telling clients level is over")
-		socket.to(data.gameID).emit('LevelOver', data.complete)
+		io.in(data.gameID).emit('LevelOver', data.complete)
 	}
 
 	function joinGame(data){
