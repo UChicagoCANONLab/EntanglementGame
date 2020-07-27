@@ -1,7 +1,7 @@
 var socket;
 
-// socket = io.connect('https://entanglement-game.herokuapp.com/');
-socket = io.connect('localhost:3000');
+socket = io.connect('https://entanglement-game.herokuapp.com/');
+// socket = io.connect('localhost:3000');
 socket.on('position', adjustPos);
 socket.on('chat', handleChat);
 socket.on('player2joined', handleP2Joined);
@@ -84,15 +84,6 @@ function adjustPos(data){
 	redraw()
 }
 
-
-function skipLevel() {
-	console.log("telling game to skip level")
-	var data = {
-		next_level: (LEVEL<4 ? LEVEL+1 : 1),
-		gameID: gameID
-	}
-	socket.emit('levelChange', data);
-}
 
 /// THIS WILL NEED SOME UPDATING
 function handleLevelChange(data) {
