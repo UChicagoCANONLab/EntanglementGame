@@ -610,10 +610,13 @@ function skipLevel() {
 }
 
 function handleLevelSkip(data) {
+	myTimerObj.stop();
 	setStartingVars(data);
 	document.getElementById('waitingalert').setAttribute("class", "");
 	document.getElementById('waitingalert').setAttribute("role", "");
 	document.getElementById('waitingalert').innerHTML = "<button type='button' class='btn btn-warning' id='preset_btn' onclick='ready()'>Ready</button>";
 	document.getElementById('infocard').style.display = 'block';
 	document.getElementById('itemcard').style.display = 'none';
+	document.getElementById('skipcard').style.display = "none";
+	document.getElementById('waitingalert').style.display = "block";
 }
