@@ -556,7 +556,7 @@ function nextItem(idx) {
 }
 
 
-var myTimerObj = () => {
+var myTimerObj = (function(document)) => {
 	var myTimer;
 	var seconds = 60;
 
@@ -580,7 +580,7 @@ var myTimerObj = () => {
 		clearInterval(myTimer)
 	}
 	return {start:start, end:end};
-}
+})(document);
 //
 // function countdown(minutes) {
 // 	console.log("countdown running")
