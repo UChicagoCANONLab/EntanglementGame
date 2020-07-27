@@ -569,7 +569,10 @@ var myTimerObj = (function(document) {
 			var current_minutes = min - 1;
 			seconds--;
 			counter.innerHTML = current_minutes.toString() + ":" + (seconds < 10 ? "0" : "") + String(seconds);
-      if (min == 0){
+			if(seconds == 0 && min > 0){
+				min = min - 1;
+				seconds = 60;
+			} else if (min == 0){
 				clearInterval(myTimer);
 				if (allow_movement) socket.emit('endGame', {gameID: gameID, complete:false});
 			}
