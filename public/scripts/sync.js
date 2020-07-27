@@ -12,7 +12,7 @@ socket.on('levelOver', levelOver);
 socket.on('newLevel', handleLevelChange);
 socket.on('aPlayerReady', readyCountChange);
 socket.on('disconectionDetected', handleDisconnection);
-socket.on('disconnecting', function(){
+socket.on('disconnect', function(){
 	alert("UH-OH there was a disconnection error");
 	document.location.reload(true);
  });
