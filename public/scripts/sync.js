@@ -9,7 +9,6 @@ socket.on('joinResult', handleTryJoin);
 socket.on('startTimerMsg', startTimer);
 socket.on('itemCollected', nextItem);
 socket.on('LevelOver', levelOver);
-socket.on('newLevel', handleLevelChange);
 socket.on('aPlayerReady', readyCountChange);
 socket.on('disconectionDetected', handleDisconnection);
 socket.on('disconnect', function(){
@@ -86,34 +85,6 @@ function adjustPos(data){
 	x_mat = data.x_mat;
 	y_mat = data.y_mat;
 	redraw()
-}
-
-
-/// THIS WILL NEED SOME UPDATING
-function handleLevelChange(data) {
-	console.log("handling level changing")
-	stop_recursion = true;
-	LEVEL = data.next_level;
-	for (const item_num in items) {
-		items[item_num]['on_board'] = false;
-		items[item_num]['collected'] = false;
-	}
-	x_loc = Math.floor(Math.random() * 2);
-	y_loc = Math.floor(Math.random() *2);
-
-	data = {
-		gameItems: gameItems,
-		x: corners[x_loc],
-		y: corners[y_loc],
-		mat_x: mat_corners[x_loc],
-		mat_y: mat_corners[y_loc],
-	}
-	itemIDX = 0;
-
-	//this needs to be fixed, teammateJoined doesn't exist anymore:
-	//teammateJoined(data);
-
-	setup();
 }
 
 

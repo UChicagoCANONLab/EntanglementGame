@@ -30,8 +30,6 @@ function newConnection(socket){
 
 	socket.on('endLevel', sendLevelOver);
 
-	socket.on('levelChange', sendLevel);
-
 	socket.on('ImReady', tellSomeoneReady);
 
 	socket.on('disconnecting', () => {
@@ -73,11 +71,6 @@ function newConnection(socket){
 	function sendLevelOver(data){
 		console.log("telling clients level is over")
 		io.in(data.gameID).emit('LevelOver', data.complete)
-	}
-
-	function sendLevel(data) {
-		console.log("telling clients to change levels")
-		socket.to(data.gameID).emit('newLevel', data)
 	}
 
 	function joinGame(data){
