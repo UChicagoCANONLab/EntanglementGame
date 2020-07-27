@@ -1,7 +1,7 @@
 var socket;
 
-// socket = io.connect('https://entanglement-game.herokuapp.com/');
-socket = io.connect('localhost:3000');
+socket = io.connect('https://entanglement-game.herokuapp.com/');
+// socket = io.connect('localhost:3000');
 socket.on('position', adjustPos);
 socket.on('chat', handleChat);
 socket.on('player2joined', handleP2Joined);
