@@ -417,6 +417,7 @@ function setStartingVars(data){
 	x_mat = data.x_mat;
 	y_mat = data.y_mat;
 	gameItems = data.gameItems;
+	itemIDX = 0;
 }
 
 
@@ -584,7 +585,6 @@ function countdown(minutes) {
 
 function levelOver(complete){
 	console.log("level over")
-	allow_movement = false;
 	if(LEVEL == 4){
 		// actual end of game logic here
 	}
@@ -593,5 +593,12 @@ function levelOver(complete){
 	} else {
 		alert(`Time ran out but you to collected ${itemIDX} items! Press OK to continue to the next level.`)
 	}
-	skipLevel()
+	
+	allow_movement = false;
+	LEVEL += 1;
+
+	if(player_num == 2) {
+		socket.emit('p2joined', getStartingVars());
+	}
+
 }
