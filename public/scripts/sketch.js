@@ -388,6 +388,7 @@ function tryStartLevel() {
 		resetBoard();
 		redraw();
 		allow_movement = true;
+		startTimer();
 		num_players_ready = 0;
 	}
 	else{
@@ -432,7 +433,7 @@ function startTimer() {
 		document.getElementById('itemcard').style.display = "block";
 		document.getElementById('skipcard').style.display = "block";
 		document.getElementById('counter').style.display = "block";
-		countdown(5);
+		myTimerObj.start();
 		nextItem(itemIDX);
 		num_players_ready = 0;
 	}
@@ -558,29 +559,55 @@ function nextItem(idx) {
 }
 
 
-function countdown(minutes) {
-	console.log("countdown running")
-    var seconds = 60;
-    var mins = minutes
-    function tick() {
-    	if (stop_recursion) {
-    		stop_recursion = false;
-    		return;
-    	}
-        var counter = document.getElementById("counter");
-        var current_minutes = mins-1
-        seconds--;
-        counter.innerHTML = current_minutes.toString() + ":" + (seconds < 10 ? "0" : "") + String(seconds);
-        if( seconds > 0 ) {
-            setTimeout(tick, 1000);
-        } else if (mins > 1){
-					countdown(mins-1);
-        } else {
-					if (allow_movement) socket.emit('endGame', {gameID: gameID, complete:false});
-				}
-    }
-    tick();
+function myTimerObj = () => {
+	var myTimer;
+	var seconds = 60;
+
+	function start() {
+		myTimer = setInterval(myClock, 1000);
+		var min  = 5;
+
+		function myClock() {
+			var counter = document.getElementById("counter");
+			var current_minutes = min - 1;
+			seconds--;
+			counter.innerHTML = current_minutes.toString() + ":" + (seconds < 10 ? "0" : "") + String(seconds);
+      if (min == 0){
+				clearInterval(myTimer);
+				if (allow_movement) socket.emit('endGame', {gameID: gameID, complete:false});
+			}
+		}
+	}
+
+	function end(){
+		clearInterval(myTimer)
+	}
+	return {start:start, end:end};
 }
+//
+// function countdown(minutes) {
+// 	console.log("countdown running")
+//     var seconds = 60;
+//     var mins = minutes
+//     function tick() {
+//     	if (stop_recursion) {
+//     		stop_recursion = false;
+//     		return;
+//     	}
+//         var counter = document.getElementById("counter");
+//         var current_minutes = mins-1
+//         seconds--;
+//         counter.innerHTML = current_minutes.toString() + ":" + (seconds < 10 ? "0" : "") + String(seconds);
+//         if( seconds > 0 ) {
+//             setTimeout(tick, 1000);
+//         } else if (mins > 1){
+// 					countdown(mins-1);
+//         } else {
+// 					if (allow_movement) socket.emit('endGame', {gameID: gameID, complete:false});
+// 				}
+//     }
+//     tick();
+// }
 
 
 function levelOver(complete){
@@ -589,11 +616,12 @@ function levelOver(complete){
 		// actual end of game logic here
 	}
 	if(complete){
+		myTimerObj.end();
 		alert("YOU COLLECTED ALL THE ITEMS! Press OK to continue to the next level.")
 	} else {
 		alert(`Time ran out but you to collected ${itemIDX} items! Press OK to continue to the next level.`)
 	}
-	
+
 	allow_movement = false;
 	LEVEL += 1;
 
