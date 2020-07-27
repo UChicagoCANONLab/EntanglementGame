@@ -8,7 +8,7 @@ socket.on('player2joined', handleP2Joined);
 socket.on('joinResult', handleTryJoin);
 socket.on('startTimerMsg', startTimer);
 socket.on('itemCollected', nextItem);
-socket.on('levelOver', levelOver);
+socket.on('LevelOver', levelOver);
 socket.on('newLevel', handleLevelChange);
 socket.on('aPlayerReady', readyCountChange);
 socket.on('disconectionDetected', handleDisconnection);
