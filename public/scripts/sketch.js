@@ -604,6 +604,7 @@ function levelOver(complete){
 }
 
 function skipLevel() {
+	console.log("skipping level")
 	allow_movement = false;
 	socket.emit('skiplevel', getStartingVars());
 }
