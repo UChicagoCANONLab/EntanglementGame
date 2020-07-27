@@ -11,6 +11,7 @@ socket.on('itemCollected', nextItem);
 socket.on('LevelOver', levelOver);
 socket.on('aPlayerReady', readyCountChange);
 socket.on('disconectionDetected', handleDisconnection);
+socket.on('skipLevelNow', handleLevelSkip);
 socket.on('disconnect', function(){
 	alert("UH-OH there was a disconnection error");
 	document.location.reload(true);

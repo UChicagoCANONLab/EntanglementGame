@@ -32,6 +32,8 @@ function newConnection(socket){
 
 	socket.on('ImReady', tellSomeoneReady);
 
+	socket.on('skiplevel', sendLevelSkip);
+
 	socket.on('disconnecting', () => {
 		console.log("socket disconnecting")
 		const sessionID = socket.id;
@@ -106,6 +108,10 @@ function newConnection(socket){
 	function chatMsg(data){
 		console.log("sending chat message to clients")
 		io.to(data.gameID).emit('chat', data)
+	}
+
+	function sendLevelSkip(data) {
+		io.in(data.gameID).emit('skipLevelNow', data);
 	}
 
 }

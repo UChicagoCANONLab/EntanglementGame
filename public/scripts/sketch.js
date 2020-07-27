@@ -606,7 +606,14 @@ function levelOver(complete){
 function skipLevel() {
 	allow_movement = false;
 	LEVEL += 1;
-	if(player_num == 2) {
-		socket.emit('p2joined', getStartingVars());
-	}
+	socket.emit('skiplevel', getStartingVars());
+}
+
+function handleLevelSkip(data) {
+	setStartingVars(data);
+	document.getElementById('waitingalert').setAttribute("class", "");
+	document.getElementById('waitingalert').setAttribute("role", "");
+	document.getElementById('waitingalert').innerHTML = "<button type='button' class='btn btn-warning' id='preset_btn' onclick='ready()'>Ready</button>";
+	document.getElementById('infocard').style.display = 'block';
+	document.getElementById('itemcard').style.display = 'none';
 }
