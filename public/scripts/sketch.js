@@ -587,10 +587,9 @@ function levelOver(complete){
 	console.log("level over")
 	if(LEVEL == 4 && complete){
 		// actual end of game logic here
-		alert("Congratulations, you beat the game! You'll be taken back to the home screen after closing this popup");
-		document.location.reload(true);
+		alert("Congratulations, you beat the game! You'll be taken back to level 1 after closing this popup. You can refresh to enter a different game.");
 	}
-	if(complete){
+	else if(complete){
 		myTimerObj.end();
 		alert("YOU COLLECTED ALL THE ITEMS! Press OK to continue to the next level.")
 	} else {
