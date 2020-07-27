@@ -12,6 +12,10 @@ socket.on('levelOver', levelOver);
 socket.on('newLevel', handleLevelChange);
 socket.on('aPlayerReady', readyCountChange);
 socket.on('disconectionDetected', handleDisconnection);
+socket.on('disconnect', function(){
+	alert("UH-OH there was a disconnection error");
+	document.location.reload(true);
+ });
 
 
 function changeGameID(){
@@ -114,8 +118,6 @@ function handleLevelChange(data) {
 
 
 function handleDisconnection(data){
-  alert("UH-OH there was a disconnection error");
-	// ideally reset back to home page but idk how to do that atm
+  	alert("UH-OH there was a disconnection error");
 	document.location.reload(true);
-	socket.emit('forceDisconnect', data);
 }
