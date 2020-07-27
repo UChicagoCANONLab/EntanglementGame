@@ -369,8 +369,6 @@ function resetBoard() {
 		maze_img = player_two.mazeImg[LEVEL - 1];
 		wall_matrix = player_two.mazeMat[LEVEL - 1];
 	}
-	console.log(wall_matrix);
-	console.log(maze_img);
 
 	//updates items accordingly
 	for (var r = 0; r < 17; r++) {
@@ -440,7 +438,6 @@ function startTimer() {
 
 
 function draw(){
-	console.log("redrawing board")
 	background(maze_img);
 	if(gameItems != null ){
 		var curr_item = gameItems[itemIDX].img_name
@@ -475,7 +472,6 @@ function draw(){
 
 
 function keyPressed() {
-	console.log("key has been pressed")
 	if (allow_movement == true) {
 		if (keyCode === UP_ARROW) {
 			if ((!(y - 72 < 0))&&(wall_matrix[y_mat-1][x_mat] != 1)) {
