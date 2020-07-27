@@ -376,6 +376,7 @@ function resetBoard() {
 			if(wall_matrix[r][c] != 0 && wall_matrix[r][c] != 1) {
 				item_name =  wall_matrix[r][c]
 				eval(item_name+"['on_board']=true");
+				eval(item_name+"['collected']=false");
 				eval(item_name+"['location']=["+(r/2).toString()+","+(c/2).toString()+"]");
 			}
 		}
@@ -584,9 +585,10 @@ var myTimerObj = (function(document) {
 
 function levelOver(complete){
 	console.log("level over")
-	if(LEVEL == 4){
+	if(LEVEL == 4 && complete){
 		// actual end of game logic here
-		console.log("you beat the game!")
+		alert("Congratulations, you beat the game! You'll be taken back to the home screen after closing this popup");
+		document.location.reload(true);
 	}
 	if(complete){
 		myTimerObj.end();
@@ -603,13 +605,18 @@ function levelOver(complete){
 }
 
 function skipLevel() {
-	console.log("skipping level")
+	console.log("skipping level");
 	allow_movement = false;
 	socket.emit('skiplevel', getStartingVars());
 }
 
 function handleLevelSkip(data) {
-	LEVEL += 1;
+	if (LEVEL == 4){
+		LEVEL = 1;
+	}
+	else {
+		LEVEL += 1;
+	}
 	myTimerObj.end();
 	setStartingVars(data);
 	document.getElementById('waitingalert').setAttribute("class", "");
