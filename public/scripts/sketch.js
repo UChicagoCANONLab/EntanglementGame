@@ -556,7 +556,7 @@ function nextItem(idx) {
 }
 
 
-function myTimerObj = () => {
+var myTimerObj = () => {
 	var myTimer;
 	var seconds = 60;
 
