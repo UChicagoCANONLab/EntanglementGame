@@ -584,30 +584,6 @@ var myTimerObj = (function(document) {
 	}
 	return {start:start, end:end};
 })(document);
-//
-// function countdown(minutes) {
-// 	console.log("countdown running")
-//     var seconds = 60;
-//     var mins = minutes
-//     function tick() {
-//     	if (stop_recursion) {
-//     		stop_recursion = false;
-//     		return;
-//     	}
-//         var counter = document.getElementById("counter");
-//         var current_minutes = mins-1
-//         seconds--;
-//         counter.innerHTML = current_minutes.toString() + ":" + (seconds < 10 ? "0" : "") + String(seconds);
-//         if( seconds > 0 ) {
-//             setTimeout(tick, 1000);
-//         } else if (mins > 1){
-// 					countdown(mins-1);
-//         } else {
-// 					if (allow_movement) socket.emit('endGame', {gameID: gameID, complete:false});
-// 				}
-//     }
-//     tick();
-// }
 
 
 function levelOver(complete){
