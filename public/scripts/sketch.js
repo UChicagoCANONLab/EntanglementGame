@@ -389,7 +389,6 @@ function tryStartLevel() {
 		console.log("ready to start")
 		resetBoard();
 		redraw();
-		allow_movement = true;
 		startTimer();
 		num_players_ready = 0;
 	}
@@ -428,19 +427,15 @@ function startTimer() {
 	console.log("checking if timer starts now")
 	num_players_ready += 1;
 	console.log(num_players_ready + " players are ready")
-	if (num_players_ready == 2){
-		allow_movement = true;
-		document.getElementById('waitingalert').style.display = "none";
-		document.getElementById('infocard').style.display = "none";
-		document.getElementById('itemcard').style.display = "block";
-		document.getElementById('skipcard').style.display = "block";
-		document.getElementById('counter').style.display = "block";
-		myTimerObj.start();
-		nextItem(itemIDX);
-		num_players_ready = 0;
-	}
-	else {
-	}
+	allow_movement = true;
+	document.getElementById('waitingalert').style.display = "none";
+	document.getElementById('infocard').style.display = "none";
+	document.getElementById('itemcard').style.display = "block";
+	document.getElementById('skipcard').style.display = "block";
+	document.getElementById('counter').style.display = "block";
+	myTimerObj.start();
+	nextItem(itemIDX);
+	num_players_ready = 0;
 }
 
 
