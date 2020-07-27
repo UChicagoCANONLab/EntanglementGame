@@ -554,11 +554,11 @@ function nextItem(idx) {
 
 var myTimerObj = (function(document) {
 	var myTimer;
-	var seconds = 60;
 
 	function start() {
 		myTimer = setInterval(myClock, 1000);
 		var min  = 5;
+		var seconds = 60;
 
 		function myClock() {
 			var counter = document.getElementById("counter");
@@ -605,11 +605,11 @@ function levelOver(complete){
 
 function skipLevel() {
 	allow_movement = false;
-	LEVEL += 1;
 	socket.emit('skiplevel', getStartingVars());
 }
 
 function handleLevelSkip(data) {
+	LEVEL += 1;
 	myTimerObj.end();
 	setStartingVars(data);
 	document.getElementById('waitingalert').setAttribute("class", "");
@@ -618,5 +618,7 @@ function handleLevelSkip(data) {
 	document.getElementById('infocard').style.display = 'block';
 	document.getElementById('itemcard').style.display = 'none';
 	document.getElementById('skipcard').style.display = "none";
+	document.getElementById('level_num_div').innerHTML = "Level: <div class='alert alert-info' role='alert'>"+LEVEL+"</div>"
 	document.getElementById('waitingalert').style.display = "block";
+	document.getElementById('counter').style.display = "none";
 }
