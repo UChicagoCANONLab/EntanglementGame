@@ -1,6 +1,5 @@
 var socket;
 var corners = [12, 588];
-
 var mat_corners = [0,17]
 
 var x = 12;
@@ -9,10 +8,9 @@ var x_mat = 0;
 var y_mat = 0;
 var reset = true;
 
-var level_num = 1;
+var LEVEL = 1;
 var teammate_connected = false;
 var player_num;
-var PLAYER;
 var gameID = "";
 var allow_movement = false;
 var gameItems;
@@ -339,57 +337,48 @@ function preload() {
 	maze4B = loadImage('../res/Maze_4B.png');
 }
 
-
 player_one = {
 	mazeImg: [maze1A, maze2A, maze3A, maze4A],
 	mazeMat: [mat_1a, mat_2a, mat_3a, mat_4a],
-	updateScreen : (level_num) => {
-		maze_img = this.mazeImg[level_num - 1];
-		wall_matrix = this.mazeMat[level_num - 1];
+	updateBoard : () => {
+		maze_img = this.mazeImg[LEVEL - 1];
+		wall_matrix = this.mazeMat[LEVEL - 1];
 	}
 }
 
 player_two = {
 	mazeImg: [maze1B, maze2B, maze3B, maze4B],
 	mazeMat: [mat_1b, mat_2b, mat_3b, mat_4b],
-	updateScreen : (level_num) => {
-		maze_img = this.mazeImg[level_num - 1];
-		wall_matrix = this.mazeMat[level_num - 1];
+	updateBoard : () => {
+		maze_img = this.mazeImg[LEVEL - 1];
+		wall_matrix = this.mazeMat[LEVEL - 1];
 	}
 }
-
-
 
 
 function setup(){
 
 	var canvasDiv = document.getElementById('game_stage');
-  	var width = canvasDiv.offsetWidth;
-  	//var game_canvas = createCanvas(width,600);
-  	var game_canvas = createCanvas(648,648);
+  var width = canvasDiv.offsetWidth;
+	var game_canvas = createCanvas(648,648);
 	game_canvas.parent("game_stage");
 
 	//set maze_img to story instead once that picture is ready
 	maze_img = maze1A;
 	background(maze_img);
 
-	if (teammate_connected) {
-		document.getElementById('teammate_connected_status_div').innerHTML = "Teammate Connected: <div class='alert alert-success' role='alert'>Yes</div>"
-		document.getElementById('waitingalert').className = "alert alert-success";
-		document.getElementById('waitingalert').innerHTML = "Waiting for both teammates to hit 'OK'";
-	}
-	else {
-		document.getElementById('teammate_connected_status_div').innerHTML = "Teammate Connected: <div class='alert alert-warning' role='alert'>Not yet</div>"
-	}
-
-	document.getElementById('level_num_div').innerHTML = "Level: <div class='alert alert-info' role='alert'>"+level_num+"</div>"
+	document.getElementById('level_num_div').innerHTML = "Level: <div class='alert alert-info' role='alert'>"+LEVEL+"</div>"
 
 	noLoop();
-
 }
 
 
 function resetBoard() {
+	//Get corresponding Maze Img and Matrix
+	if (player_num == 1) player_one.updateBoard();
+	else player_two.updateBoard();
+
+	//updates items accordingly
 	for (var r = 0; r < 17; r++) {
 		for (var c = 0; c < 17; c++) {
 			if(wall_matrix[r][c] != 0 && wall_matrix[r][c] != 1) {
@@ -411,22 +400,28 @@ function tryStartLevel() {
 	}
 }
 
+function getStartingVars(){
+
+	x_loc = Math.floor(Math.random() * 2);
+	y_loc = Math.floor(Math.random() *2);
+	const startingVars = {
+		gameID: gameID,
+		x: corners[x_loc],
+		y: corners[y_loc],
+		x_mat: mat_corners[x_loc],
+		y_mat: mat_corners[y_loc],
+		gameItems: shuffle(items)
+	};
+	return startingVars;
+}
+
 function setStartingVars(data){
-	gameItems = data.gameItems;
+	console.log(data);
 	x = data.x;
 	y = data.y;
-	if (x==12) {
-		x_mat = 0;
-	}
-	else if(x==588) {
-		x_mat = 16;
-	}
-	if (y==12) {
-		y_mat = 0;
-	}
-	else if(y==588) {
-		y_mat = 16;
-	}
+	x_mat = data.x_mat;
+	y_mat = data.y_mat;
+	gameItems = data.gameItems;
 }
 
 

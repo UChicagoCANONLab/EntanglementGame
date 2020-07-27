@@ -39,10 +39,7 @@ function handleTryJoin(result){
 		gameID = result.gameID;
 		player_num = result.player_num;
 		document.getElementById('gamecodediv').innerHTML = "Game Code: <div class='alert alert-warning' role='alert'>"+gameID+"</div>";
-    	const start_x = corners[Math.floor(Math.random() * 2)];
-		const start_y = corners[Math.floor(Math.random() * 2)];
-		data = {gameID:gameID, gameItems: shuffle(items), x: start_x, y: start_y};
-		socket.emit('p2joined', data);
+		socket.emit('p2joined', getStartingVars());
 		// think it would go here:
 		// PLAYER = player_two;
 	}
@@ -95,7 +92,7 @@ function skipLevel() {
 	socket.emit('levelChange', data);
 }
 
-
+/// THIS WILL NEED SOME UPDATING
 function handleLevelChange(data) {
 	console.log("handling level changing")
 	stop_recursion = true;
@@ -104,11 +101,15 @@ function handleLevelChange(data) {
 		items[item_num]['on_board'] = false;
 		items[item_num]['collected'] = false;
 	}
+	x_loc = Math.floor(Math.random() * 2);
+	y_loc = Math.floor(Math.random() *2);
 
 	data = {
 		gameItems: gameItems,
-		x: corners[Math.floor(Math.random() * 2)],
-		y: corners[Math.floor(Math.random() * 2)]
+		x: corners[x_loc],
+		y: corners[y_loc],
+		mat_x: mat_corners[x_loc],
+		mat_y: mat_corners[y_loc],
 	}
 	itemIDX = 0;
 
