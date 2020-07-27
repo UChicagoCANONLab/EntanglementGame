@@ -547,7 +547,7 @@ function nextItem(idx) {
 		document.getElementById('item_descrip').innerHTML = "Work with your teammate to get this item as fast as possible!";
 	}
 	else {
-		document.getElementById('item_descrip').innerHTML = "The item is on your teammate's board! Follow their lead!";
+		document.getElementById('item_descrip').innerHTML = "Work with your teammate to get this item as fast as possible!";
 	}
 }
 
@@ -570,7 +570,7 @@ var myTimerObj = (function(document) {
 				seconds = 60;
 			} else if (min == 0){
 				clearInterval(myTimer);
-				if (allow_movement) socket.emit('endGame', {gameID: gameID, complete:false});
+				if (allow_movement) socket.emit('endLevel', {gameID: gameID, complete:false});
 			}
 		}
 	}
