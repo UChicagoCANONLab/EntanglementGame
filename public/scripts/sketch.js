@@ -596,10 +596,9 @@ function levelOver(complete){
 	}
 
 	allow_movement = false;
-	LEVEL += 1;
 
 	if(player_num == 2) {
-		socket.emit('p2joined', getStartingVars());
+		socket.emit('skiplevel', getStartingVars());
 	}
 }
 
