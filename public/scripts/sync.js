@@ -15,7 +15,7 @@ socket.on('disconectionDetected', handleDisconnection);
 socket.on('disconnect', function(){
 	alert("UH-OH there was a disconnection error");
 	document.location.reload(true);
- });
+});
 
 
 function changeGameID(){
