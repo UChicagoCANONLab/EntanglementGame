@@ -386,8 +386,9 @@ function resetBoard() {
 function tryStartLevel() {
 	if(num_players_ready == 2) {
 		console.log("ready to start")
-		// resetBoard();
-		// redraw();
+		resetBoard();
+		redraw();
+		allow_movement = true;
 		num_players_ready = 0;
 	}
 	else{
