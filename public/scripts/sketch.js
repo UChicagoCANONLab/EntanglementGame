@@ -571,7 +571,7 @@ var myTimerObj = (function(document) {
 				seconds = 60;
 			} else if (min == 0){
 				clearInterval(myTimer);
-				if (allow_movement) socket.emit('endLevel', {gameID: gameID, complete:false});
+				if (player_num == 2) socket.emit('endLevel', {gameID: gameID, complete:false});
 			}
 		}
 	}
