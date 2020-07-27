@@ -586,6 +586,7 @@ function levelOver(complete){
 	console.log("level over")
 	if(LEVEL == 4){
 		// actual end of game logic here
+		console.log("you beat the game!")
 	}
 	if(complete){
 		myTimerObj.end();
@@ -600,5 +601,12 @@ function levelOver(complete){
 	if(player_num == 2) {
 		socket.emit('p2joined', getStartingVars());
 	}
+}
 
+function skipLevel() {
+	allow_movement = false;
+	LEVEL += 1;
+	if(player_num == 2) {
+		socket.emit('p2joined', getStartingVars());
+	}
 }
