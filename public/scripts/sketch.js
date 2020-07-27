@@ -18,6 +18,7 @@ var player_one
 var player_two
 var player_img
 var maze_img
+var story_img
 
 var computer_img
 var experiment_img
@@ -305,6 +306,7 @@ items = [computer, experiment, first_aid, flag, fuel, manual, mapp, moon_rock, t
 function preload() {
 
 	player_img = loadImage('../res/p1.png');
+	story_img = loadImage('../res/story.jpeg');
 	computer_img = loadImage(computer.img_path);
 	experiment_img = loadImage(experiment.img_path);
 	first_aid_img = loadImage(first_aid.img_path);
@@ -317,7 +319,7 @@ function preload() {
 	walkie_talkie_img = loadImage(walkie_talkie.img_path);
 	water_img = loadImage(water.img_path);
 	wrench_img = loadImage(wrench.img_path);
-  maze1A = loadImage('../res/Maze_1A.png');
+ 	maze1A = loadImage('../res/Maze_1A.png');
 	maze1B = loadImage('../res/Maze_1B.png');
 	maze2A = loadImage('../res/Maze_2A.png');
 	maze2B = loadImage('../res/Maze_2B.png');
@@ -331,12 +333,12 @@ function preload() {
 function setup(){
 
 	var canvasDiv = document.getElementById('game_stage');
-  var width = canvasDiv.offsetWidth;
+  	var width = canvasDiv.offsetWidth;
 	var game_canvas = createCanvas(648,648);
 	game_canvas.parent("game_stage");
 
 	//set maze_img to story instead once that picture is ready
-	maze_img = maze1A;
+	maze_img = story_img
 	background(maze_img);
 
 	player_one = {
