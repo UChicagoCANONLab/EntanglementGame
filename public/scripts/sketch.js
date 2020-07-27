@@ -364,8 +364,8 @@ function resetBoard() {
 		wall_matrix = player_one.mazeMat[LEVEL - 1];
 	}
 	else{
-		maze_img = player_one.mazeImg[LEVEL - 1];
-		wall_matrix = player_one.mazeMat[LEVEL - 1];
+		maze_img = player_two.mazeImg[LEVEL - 1];
+		wall_matrix = player_two.mazeMat[LEVEL - 1];
 	}
 	console.log(wall_matrix);
 	console.log(maze_img);
