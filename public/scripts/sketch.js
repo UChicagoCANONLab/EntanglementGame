@@ -610,7 +610,7 @@ function skipLevel() {
 }
 
 function handleLevelSkip(data) {
-	myTimerObj.stop();
+	myTimerObj.end();
 	setStartingVars(data);
 	document.getElementById('waitingalert').setAttribute("class", "");
 	document.getElementById('waitingalert').setAttribute("role", "");
