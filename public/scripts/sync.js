@@ -115,9 +115,7 @@ function handleLevelChange(data) {
 
 function handleDisconnection(data){
   alert("UH-OH there was a disconnection error");
-	LEVEL = 1;
-
 	// ideally reset back to home page but idk how to do that atm
-  resetBoard();
+	document.location.reload(true);
 	socket.emit('forceDisconnect', data);
 }
