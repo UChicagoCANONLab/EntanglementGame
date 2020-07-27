@@ -1,6 +1,6 @@
 var socket;
 var corners = [12, 588];
-var mat_corners = [0,17]
+var mat_corners = [0,16]
 
 var x = 12;
 var y = 12;
@@ -386,8 +386,8 @@ function resetBoard() {
 function tryStartLevel() {
 	if(num_players_ready == 2) {
 		console.log("ready to start")
-		resetBoard();
-		redraw();
+		// resetBoard();
+		// redraw();
 		num_players_ready = 0;
 	}
 	else{
