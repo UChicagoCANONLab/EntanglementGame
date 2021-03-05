@@ -524,19 +524,21 @@ var myTimerObj = (function(document) {
 
 	function start() {
 		myTimer = setInterval(myClock, 1000);
-		var min  = 5;
-		var seconds = 60;
+		var minutesRemaining = 8;
+		var secondsRemaining = 30;
 
 		function myClock() {
 			var counter = document.getElementById("counter");
-			var current_minutes = min - 1;
-			seconds--;
-			counter.innerHTML = current_minutes.toString() + ":" + (seconds < 10 ? "0" : "") + String(seconds);
-			if(seconds == 0 && min > 0){
-				min = min - 1;
-				seconds = 60;
-			} else if (min == 0){
+			var current_minutes = minutesRemaining;
+			secondsRemaining--;
+			counter.innerHTML = current_minutes.toString() + ":" + (secondsRemaining < 10 ? "0" : "") + String(secondsRemaining);
+			if(secondsRemaining <= 0 && minutesRemaining > 0){
+				minutesRemaining = minutesRemaining - 1;
+				secondsRemaining = 60;
+			} else if (secondsRemaining <= 0 && minutesRemaining <= 0){
 				clearInterval(myTimer);
+				minutesRemaining = 0
+				secondsRemaining = 0
 				if (player_num == 2) socket.emit('endLevel', {gameID: gameID, complete:false});
 			}
 		}

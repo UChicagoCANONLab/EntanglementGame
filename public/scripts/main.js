@@ -45,6 +45,16 @@ function askLeft(){
 	socket.emit('chat', data);
 }
 
+function askItem(){
+	message_text = 'Can you see the item?'
+	var data = {
+		gameID: gameID,
+		message_text: message_text,
+		player_num: player_num
+	}
+	socket.emit('chat', data);
+}
+
 function chatYes(){
 	message_text = 'Yes!'
 	var data = {
